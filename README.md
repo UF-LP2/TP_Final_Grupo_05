@@ -1,11 +1,11 @@
-# TP Final - Grupo `XX`
+# TP Final - Grupo `05`
 ### Consigna
     Consigna del TP Final
 ### Descripción
-    Descripción del proyecto
+    Logistica y distribución de electrodomésticos
 ### Integrantes
-- Integrante 1
-- Integrante 2
+- Conde Joaquín
+- González Nuñez Florencia
 ---
 ##### Universidad Favaloro - Laboratorio de Programación II
 ##### 2do Cuatrimestre - 2022
