@@ -17,8 +17,8 @@ public class cPedidos {
 
 	private readonly string NumPedido;
 	private ePrioridad Prioridad;
-	public cCliente m_cCliente;
-	public cArticulos m_cArticulos;
+	public cCliente *Cliente ;
+	public cArticulos *Articulos;
 
 	public cPedidos(){
 

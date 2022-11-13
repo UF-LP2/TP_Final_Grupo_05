@@ -11,44 +11,70 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-
-
 public class cCocimundo {
 
-	public cVehiculos m_cVehiculos;
-	public cPedidos m_cPedidos;
+	public List<cVehiculos> ListaVehiculos;
+	public List<cPedidos> ListaPedidos;
 
 	public cCocimundo(){
+		ListaPedidos = new List<cPedidos>();
+		ListaVehiculos = new List<cVehiculos>();
 
 	}
 
 	~cCocimundo(){
 
 	}
-
-	public void AgregarPedido(){
-
+	static int max(int a, int b) //maximo entre 2 numeros
+	{
+		return (a > b) ? a : b;
 	}
+	public void AgregarPedido(cPedidos pedido){
+		ListaPedidos.Add(pedido);
+			}
 
-	public void CalcularCosto(){
-
-	}
-
-	public void CalcularDepreacion(){
-
-	}
-
-	public void EliminarPedido(){
-
+	public void EliminarPedido(cPedidos pedido)
+	{
+		ListaPedidos.Remove(pedido);
 	}
 
 	public void FinalDelDia(){
 
 	}
 
-	public cPedido QuitarPedido(){
+	/*public cPedido QuitarPedido(){
 
-		return null;
+		return null; 
+	}*/
+	public List<cPedidos> Dinamico_Mochila()
+    {
+		/*Entero Matriz[N][M] //Matriz dinamica de dimensiones N y M
+		vector SubListaPedidos //vector dinamico 
+		Entero j, k ?  0
+	Desde  j ?  0 Hasta j < ListaPedidos.getCantTotal()
+	Si (ListaPedidos.getItem(j).getPrioridad() == EXPRESS) //Se arma una sublista que va a ser la mochila
+		SubListaPedidos[k] = ListaPedidos.getItem(j)
+		k ? k +1
+	j ? j + 1
+
+	// Ahora creamos la mochila
+		Entero i, w
+	Desde i ?  0 Hasta i < SubListaPedidos.CantArticulos()
+			Desde w ?  0 Hasta w < ListaVehiculos[].Volumen()
+				Si i == 0 o w == 0
+					Matriz[i][w] ?  0
+
+				Si no si ListaPedidos[i - 1] <= w
+					Matriz[i][w] ? max(val[i - 1] + K[i - 1][w - wt[i - 1]], K[i - 1][w])
+				Si no
+					Matriz[i][w] ? K[i - 1][w] 
+				j ? j +1
+		i  ? i + 1
+
+		devolver K[n][W]
+	*/
+		
+		vector<vector<int>> K(ListaPedidos.Count() +1, vector<int>(ListaVehiculos. + 1));
+
 	}
-
 }//end cCocimundo
