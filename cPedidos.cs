@@ -13,12 +13,21 @@ using System.IO;
 
 
 
+public enum ePrioridad : int
+{
+
+	EXPRESS = 1,
+	DOSDIAS = 2,
+	NORMAL = 3,
+	DIFERIDO = 4
+
+}
 public class cPedidos {
 
 	private readonly string NumPedido;
 	private ePrioridad Prioridad;
-	public cCliente *Cliente ;
-	public cArticulos *Articulos;
+	public cCliente Cliente;
+	public List<cArticulos> Articulos;
 
 	public cPedidos(){
 
@@ -27,5 +36,22 @@ public class cPedidos {
 	~cPedidos(){
 
 	}
-
+	string getPrioridad()
+    {
+        switch (Prioridad)
+        {
+			case EXPRESS:
+				return "express";
+			case DOSDIAS:
+				return "48 horas";
+			case NORMAL:
+				return "normal";
+			case DIFERIDO:
+				return "diferido";
+		}
+    }
+	void ModificarPrioridad()
+    {
+		Prioridad = Prioridad - 1;
+    }
 }//end cPedidos

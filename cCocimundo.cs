@@ -39,42 +39,44 @@ public class cCocimundo {
 	}
 
 	public void FinalDelDia(){
-
+		for(int i = 0; i < ListaPedidos.Count(); i++)
+        {
+			ListaPedidos.ModificarPrioridad();
+        }
 	}
 
 	/*public cPedido QuitarPedido(){
 
 		return null; 
 	}*/
-	public List<cPedidos> Dinamico_Mochila()
+	public int Dinamico_Mochila(cVehiculos vehiculo)
     {
-		/*Entero Matriz[N][M] //Matriz dinamica de dimensiones N y M
-		vector SubListaPedidos //vector dinamico 
-		Entero j, k ?  0
-	Desde  j ?  0 Hasta j < ListaPedidos.getCantTotal()
-	Si (ListaPedidos.getItem(j).getPrioridad() == EXPRESS) //Se arma una sublista que va a ser la mochila
-		SubListaPedidos[k] = ListaPedidos.getItem(j)
-		k ? k +1
-	j ? j + 1
+	
+		int numpedidos = ListaPedidos.Count();
 
-	// Ahora creamos la mochila
-		Entero i, w
-	Desde i ?  0 Hasta i < SubListaPedidos.CantArticulos()
-			Desde w ?  0 Hasta w < ListaVehiculos[].Volumen()
-				Si i == 0 o w == 0
-					Matriz[i][w] ?  0
+		int[,] Matriz = new int[numpedidos + 1, ListaVehiculos.Volumen()];
+		List<cPedidos> sublistapedidos;
+		for (int j = 0; j < numpedidos; j++)
+        {
+			if (ListaPedidos[j].getPrioridad == "express")
+            {
+				sublistapedidos.Add(ListaPedidos[j]); // Hago una sublista de los pedidos express
+				
+            }
+        } 
+		for (int i = 0; i < sublistapedidos.Count(); i++)
+        {
+			for (int w = 0; w< ListaVehiculos.Volumen(); w++)//chequear
+            {
+				if (w == 0 | i == 0)
+					Matriz[i][w] = 0;
+				else if (sublistapedidos[i - 1] <= w)
 
-				Si no si ListaPedidos[i - 1] <= w
-					Matriz[i][w] ? max(val[i - 1] + K[i - 1][w - wt[i - 1]], K[i - 1][w])
-				Si no
-					Matriz[i][w] ? K[i - 1][w] 
-				j ? j +1
-		i  ? i + 1
-
-		devolver K[n][W]
-	*/
-		
-		vector<vector<int>> K(ListaPedidos.Count() +1, vector<int>(ListaVehiculos. + 1));
-
+					Matriz[i][w] = max(Matriz[i - 1, w - wt[i - 1]], Matriz[i - 1, w]);
+				else
+					Matriz[i, w] = Matriz[i - 1, w];
+            }
+        }
+		return Matriz[n][W];
 	}
 }//end cCocimundo

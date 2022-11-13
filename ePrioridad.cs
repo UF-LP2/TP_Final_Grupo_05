@@ -15,9 +15,9 @@ using System.IO;
 
 public enum ePrioridad : int {
 
-	EXPRESS = 1,
+	EXPRESS = 1, 
+	DOSDIAS = 2,
 	NORMAL = 3,
-	DIFERIDO = 4,
-	48HORAS = 2
+	DIFERIDO = 4
 
 }//end ePrioridad
