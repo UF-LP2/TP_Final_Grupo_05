@@ -66,6 +66,7 @@ partial class Form1
             this.label35 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.Salida = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -362,7 +363,6 @@ partial class Form1
             this.label30.Size = new System.Drawing.Size(124, 15);
             this.label30.TabIndex = 31;
             this.label30.Text = "Nodo Aun no Visitado";
-            this.label30.Click += new System.EventHandler(this.label30_Click);
             // 
             // label31
             // 
@@ -473,6 +473,15 @@ partial class Form1
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // Salida
+            // 
+            this.Salida.AutoSize = true;
+            this.Salida.BackColor = System.Drawing.Color.Transparent;
+            this.Salida.Location = new System.Drawing.Point(282, 245);
+            this.Salida.Name = "Salida";
+            this.Salida.Size = new System.Drawing.Size(0, 15);
+            this.Salida.TabIndex = 42;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -480,6 +489,7 @@ partial class Form1
             this.BackColor = System.Drawing.Color.DarkGray;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(734, 571);
+            this.Controls.Add(this.Salida);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label36);
             this.Controls.Add(this.label35);
@@ -519,7 +529,6 @@ partial class Form1
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -564,4 +573,6 @@ partial class Form1
     private Label label35;
     private Label label36;
     private Button button1;
+    private TextBox textBox1;
+    private Label Salida;
 }
