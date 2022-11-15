@@ -24,104 +24,104 @@ public class cUbicacion {
 		switch(Barrio)
 		{
             case eBarrio.Comuna_1:
-                x = 14.1; //km a comuna 1 (liniers especificamente)
+                x = 14.1; //km a comuna 1 (desde liniers especificamente)
                 y = 1.1;
                 break;
             case eBarrio.Comuna_2:
-                x = ;
-                y = ;
+                x = 13.5;
+                y = 5.3;
                 break;
             case eBarrio.Comuna_3:
-                x = ;
-                y = ;
+                x = 12.7;
+                y = 2.5;
                 break;
             case eBarrio.Comuna_4:
-                x = ;
-                y = ;
+                x = 12.3;
+                y = 1.3;
                 break;
             case eBarrio.Comuna_5:
-                x = ;
-                y = ;
+                x = 10.4;
+                y = 0.65;
                 break;
             case eBarrio.Comuna_6:
-                x = ;
-                y = ;
+                x = 8.7;
+                y = 1.5;
                 break;
             case eBarrio.Comuna_7:
-                x = ;
-                y = ;
+                x = 7.6;
+                y = 0.7;
                 break;
             case eBarrio.Comuna_8:
-                x = ;
-                y = ;
+                x = 6.6;
+                y = -5.3;
                 break;
             case eBarrio.Comuna_9:
                 x = 0;
                 y = 0;
                 break;
             case eBarrio.Comuna_10:
-                x = ;
-                y = ;
+                x = 2.7;
+                y = 2.9;
                 break;
             case eBarrio.Comuna_11:
-                x = ;
-                y = ;
+                x = 4.0;
+                y = 5.7;
                 break;
             case eBarrio.Comuna_12:
-                x = ;
-                y = ;
+                x = 5.9;
+                y = 9.6;
                 break;
             case eBarrio.Comuna_13:
-                x = ;
-                y = ;
+                x = 9.1;
+                y = 10.4;
                 break;
             case eBarrio.Comuna_14:
-                x = ;
-                y = ;
+                x = 10.8;
+                y = 7.2;
                 break;
             case eBarrio.Comuna_15:
-                x = ;
-                y = ;
+                x = 6.7;
+                y = 5.8;
                 break;
             case eBarrio.VicenteLopez:
-                x = ;
-                y = ;
+                x = 7.8;
+                y = 15.5;
                 break;
             case eBarrio.SanIsidro:
-                x = ;
-                y = ;
+                x = 8.2;
+                y = 19.9;
                 break;
             case eBarrio.SanMartin:
-                x = ;
-                y = ;
+                x = 2.4;
+                y = 10.2;
                 break;
             case eBarrio.TresdeFebrero:
-                x = ;
-                y = ;
+                x = -2.1;
+                y = 4.1;
                 break;
             case eBarrio.Moron:
-                x = ;
-                y = ;
+                x = -9;
+                y = -1.2;
                 break;
             case eBarrio.LaMatanza:
-                x = ;
-                y = ;
+                x = -3.9;
+                y = -4.6;
                 break;
             case eBarrio.LomasdeZAmora:
-                x = ;
-                y = ;
+                x = 10.3;
+                y = -13.1;
                 break;
             case eBarrio.Lanus:
-                x = ;
-                y = ;
+                x = 13.9;
+                y = -6.3;
                 break;
             case eBarrio.Avellaneda:
-                x = ;
-                y = ;
+                x = 15.6;
+                y = -4.6;
                 break;
             default:
-                x = ;
-                y = ;
+                x = 0;
+                y = 0;
                 break;
         }
 	}
@@ -134,5 +134,87 @@ public class cUbicacion {
 
     public eBarrio GetBarrio() { return Com_Part; }
 
-
+    public string to_String()
+    {
+        string texto;
+        switch (Com_Part)
+        {
+            case eBarrio.Comuna_1:
+                texto = "Comuna 1";
+                break;
+            case eBarrio.Comuna_2:
+                texto = "Comuna 2";
+                break;
+            case eBarrio.Comuna_3:
+                texto = "Comuna 3";
+                break;
+            case eBarrio.Comuna_4:
+                texto = "Comuna 4";
+                break;
+            case eBarrio.Comuna_5:
+                texto = "Comuna 5";
+                break;
+            case eBarrio.Comuna_6:
+                texto = "Comuna 6";
+                break;
+            case eBarrio.Comuna_7:
+                texto = "Comuna 7";
+                break;
+            case eBarrio.Comuna_8:
+                texto = "Comuna 8";
+                break;
+            case eBarrio.Comuna_9:
+                texto = "Comuna 9";
+                break;
+            case eBarrio.Comuna_10:
+                texto = "Comuna 10";
+                break;
+            case eBarrio.Comuna_11:
+                texto = "Comuna 11";
+                break;
+            case eBarrio.Comuna_12:
+                texto = "Comuna 12";
+                break;
+            case eBarrio.Comuna_13:
+                texto = "Comuna 13";
+                break;
+            case eBarrio.Comuna_14:
+                texto = "Comuna 14";
+                break;
+            case eBarrio.Comuna_15:
+                texto = "Comuna 15";
+                break;
+            case eBarrio.VicenteLopez:
+                texto = "Vicente Lopez";
+                break;
+            case eBarrio.SanIsidro:
+                texto = "San Isidro";
+                break;
+            case eBarrio.SanMartin:
+                texto = "San Martin";
+                break;
+            case eBarrio.TresdeFebrero:
+                texto = "Tres de Febrero";
+                break;
+            case eBarrio.Moron:
+                texto = "Moron";
+                break;
+            case eBarrio.LaMatanza:
+                texto = "La Matanza";
+                break;
+            case eBarrio.LomasdeZAmora:
+                texto = "Lomas de Zamora";
+                break;
+            case eBarrio.Lanus:
+                texto = "Lanus";
+                break;
+            case eBarrio.Avellaneda:
+                texto = "Avellaneda";
+                break;
+            default:
+                texto = "Default";
+                break;
+        }
+        return texto;
+    }
 }//end cUbicacion

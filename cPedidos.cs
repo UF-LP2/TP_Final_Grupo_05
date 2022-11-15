@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Runtime.Intrinsics.X86;
+using CsvHelper.Configuration.Attributes;
 
 public enum ePrioridad : int{EXPRESS = 1, DOSDIAS = 2, NORMAL = 3, DIFERIDO = 4};
 public struct Dimensiones
@@ -19,20 +20,22 @@ public struct Dimensiones
     public double largo;
     public double alto;
 }
-public enum eTipoArt : int { Linea_Blanca, Electrdomestico, Televisor }
+public enum eTipoArt : int { Linea_Blanca, Electronico, Televisor, PequeElectro }
 
 public class cPedidos {
 
-	static private int NumPedido = 0;
+	static private int contador = 0;
+    private int NumPedido;
 	private ePrioridad Prioridad;
 	public cCliente Cliente;
     private string nombre;
     private Dimensiones dimens;
-    private float peso;
+    private double peso;
     private double volumen;
     public eTipoArt TipoArticulo;
+    private double Precio;
 
-    public cPedidos(cCliente Cliente_, ePrioridad Prioridad_, string nombre_, double ancho_, double largo_, double alto_, float peso_, eTipoArt TipoArticulo_)
+    public cPedidos(cCliente Cliente_, ePrioridad Prioridad_, string nombre_, double ancho_, double largo_, double alto_, double peso_, eTipoArt TipoArticulo_, double Precio_)
     {
         nombre = nombre_;
         dimens.ancho = ancho_;
@@ -41,32 +44,78 @@ public class cPedidos {
         peso = peso_;
         volumen = ancho_ * largo_ * alto_;
         TipoArticulo = TipoArticulo_;
-        NumPedido++;
+        NumPedido = ++contador;
 		Cliente = Cliente_;
 		Prioridad = Prioridad_;
+        Precio = Precio_;
 	}
     ~cPedidos(){
 
 	}
-	public string getPrioridad()
+
+    public double getPrecio() { return Precio; }
+	public ePrioridad getPrioridad()
     {
 		
-        switch (Prioridad)
+        switch (this.Prioridad)
         {
-			case EXPRESS:
-				return "express";
-			case DOSDIAS:
-				return "48 horas";
-			case NORMAL:
-				return "normal";
-			case DIFERIDO:
-				return "diferido";
+			case ePrioridad.EXPRESS:
+				return ePrioridad.EXPRESS;
+			case ePrioridad.DOSDIAS:
+				return ePrioridad.DOSDIAS;
+            case ePrioridad.NORMAL:
+				return ePrioridad.NORMAL;
+			case ePrioridad.DIFERIDO:
+				return ePrioridad.DIFERIDO;
 			default:
-				return "express";
+				return ePrioridad.DIFERIDO;
 		}
     }
 	public void ModificarPrioridad()
     {
 		Prioridad--;
+    }
+
+    public string to_String()
+    {
+        string texto;
+        texto = Cliente.to_String();
+        texto += "\nNombre: " + nombre + "\nDimensiones\nAncho: " + Convert.ToString(dimens.ancho) + " metros \nLargo: " + Convert.ToString(dimens.largo) + " metros\nAlto: " + Convert.ToString(dimens.alto);
+        texto += " metros \nPeso " + Convert.ToString(peso) + " kg\nVolumen: " + Convert.ToString(volumen) + " metros cubicos\nTipo de articulo: ";
+        switch(TipoArticulo)
+        {
+            case eTipoArt.Linea_Blanca:
+                texto += "Linea Blanca";
+                break;
+            case eTipoArt.Electronico:
+                texto += "Electronico";
+                break;
+            case eTipoArt.Televisor:
+                texto += "Televisor";
+                break;
+            case eTipoArt.PequeElectro:
+                texto += "Pequenio Electrdomestico";
+                break;
+
+        }
+        texto += "\nNumero de Pedido: " + Convert.ToString(NumPedido);
+        texto += "\nPrioridad actual: ";
+        switch(Prioridad)
+        {
+            case ePrioridad.EXPRESS:
+                texto += "Express";
+                break;
+            case ePrioridad.DOSDIAS:
+                texto += "Dos dias";
+                break;
+            case ePrioridad.NORMAL:
+                texto += "Normal";
+                break;
+            case ePrioridad.DIFERIDO:
+                texto += "Diferido";
+                break;
+        }
+        texto += "\nPrecio: " + Convert.ToString(Precio) + " pesos\n";
+        return texto;
     }
 }//end cPedidos

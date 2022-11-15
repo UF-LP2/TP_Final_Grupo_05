@@ -29,4 +29,11 @@ public class cCliente {
 
 	}
 
+	public string to_String()
+	{
+		string texto;
+		texto = "Nombre y Apellido: " + NomyAp + "\nDNI: " + DNI + "\nUbicacion: ";
+		texto += m_cUbicacion.to_String();
+		return texto;
+	}
 }//end cCliente

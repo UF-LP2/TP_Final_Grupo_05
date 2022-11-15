@@ -22,6 +22,7 @@ public class cVehiculos {
     protected float Peso_Max;
     protected int Viajes_Realizados;
 	protected double Vol_Max;
+    //protected double distanciarecorrida;
 
 	public cVehiculos(){
 
