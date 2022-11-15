@@ -32,43 +32,10 @@ public class cCocimundo {
     public void MasDinero(double entrante) { Dinero += entrante; }
     public void MenosDinero(double saliente) { Dinero -= saliente; }
 
-    ~cCocimundo(){
-
-
-    
-	}
-
-    //public void LlenarMochila(int[,] matriz, int fila, int columna, List<cPedidos> sublista)
-
-    /*
-    public void ImprimirMatriz(int[,] matriz, int fila, int columna)
+    ~cCocimundo()
     {
-        // Se queda con lo que le genera mas ganancia
-        int max = 0;
-        int iterador = 0;
-        for(int i = 0; i < fila; i++)
-        {
-            for (int j = 0; j < columna; j++)
-            {
-                if (matriz[i,j] != 0) // no cuento si es 0
-                { 
-                    if(max < matriz[i,j])
-                    {
-                        max = matriz[i, j];
-                        iterador = i;
-                    }
-                }
-            }
-        }
-        for (int i = iterador; i < fila; i++)
-        {
 
-            sublista.Add(ListaPedidos[i]); //Agrega solo los elementos despues de este
-            
-        }
-      
-
-    }*/
+    }
 
 	public void FinalDelDia(){
 		for (int i = 0; i < ListaPedidos.Count; i++)
