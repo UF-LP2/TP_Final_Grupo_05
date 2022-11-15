@@ -39,6 +39,7 @@ public class cCocimundo {
     {
         // Se queda con lo que le genera mas ganancia
         int max = 0;
+        int iterador = 0;
         for(int i = 0; i < fila; i++)
         {
             for (int j = 0; j < columna; j++)
@@ -48,12 +49,19 @@ public class cCocimundo {
                     if(max < matriz[i,j])
                     {
                         max = matriz[i, j];
+                        iterador = i;
                     }
                 }
             }
         }
-        Console.WriteLine(max);
-       
+        for (int i = iterador; i < fila; i++)
+        {
+
+            sublista.Add(Lista[i]); //Agrega solo los elementos despues de este
+            
+        }
+      
+
     }
 	public void AgregarPedido(cPedidos pedido){
 		ListaPedidos.Add(pedido);
