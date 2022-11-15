@@ -63,6 +63,9 @@ partial class Form1
             this.label23 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -114,7 +117,7 @@ partial class Form1
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Location = new System.Drawing.Point(130, 431);
+            this.label5.Location = new System.Drawing.Point(80, 457);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 17);
             this.label5.TabIndex = 4;
@@ -136,7 +139,7 @@ partial class Form1
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label8.Location = new System.Drawing.Point(181, 154);
+            this.label8.Location = new System.Drawing.Point(215, 139);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(30, 17);
             this.label8.TabIndex = 7;
@@ -147,7 +150,7 @@ partial class Form1
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label9.Location = new System.Drawing.Point(363, 389);
+            this.label9.Location = new System.Drawing.Point(307, 359);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(30, 17);
             this.label9.TabIndex = 8;
@@ -158,7 +161,7 @@ partial class Form1
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label10.Location = new System.Drawing.Point(330, 470);
+            this.label10.Location = new System.Drawing.Point(431, 290);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(30, 17);
             this.label10.TabIndex = 9;
@@ -169,7 +172,7 @@ partial class Form1
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label11.Location = new System.Drawing.Point(444, 203);
+            this.label11.Location = new System.Drawing.Point(391, 175);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(30, 17);
             this.label11.TabIndex = 10;
@@ -180,7 +183,7 @@ partial class Form1
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label12.Location = new System.Drawing.Point(130, 535);
+            this.label12.Location = new System.Drawing.Point(317, 533);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(30, 17);
             this.label12.TabIndex = 11;
@@ -191,7 +194,7 @@ partial class Form1
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label13.Location = new System.Drawing.Point(317, 119);
+            this.label13.Location = new System.Drawing.Point(296, 108);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(30, 17);
             this.label13.TabIndex = 12;
@@ -202,7 +205,7 @@ partial class Form1
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label14.Location = new System.Drawing.Point(527, 275);
+            this.label14.Location = new System.Drawing.Point(444, 218);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(30, 17);
             this.label14.TabIndex = 13;
@@ -235,7 +238,7 @@ partial class Form1
             this.label17.AutoSize = true;
             this.label17.BackColor = System.Drawing.Color.Transparent;
             this.label17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label17.Location = new System.Drawing.Point(456, 389);
+            this.label17.Location = new System.Drawing.Point(391, 305);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(30, 17);
             this.label17.TabIndex = 16;
@@ -246,7 +249,7 @@ partial class Form1
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label18.Location = new System.Drawing.Point(527, 470);
+            this.label18.Location = new System.Drawing.Point(444, 349);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(30, 17);
             this.label18.TabIndex = 17;
@@ -257,7 +260,7 @@ partial class Form1
             this.label19.AutoSize = true;
             this.label19.BackColor = System.Drawing.Color.Transparent;
             this.label19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label19.Location = new System.Drawing.Point(648, 349);
+            this.label19.Location = new System.Drawing.Point(516, 278);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(30, 17);
             this.label19.TabIndex = 18;
@@ -268,7 +271,7 @@ partial class Form1
             this.label20.AutoSize = true;
             this.label20.BackColor = System.Drawing.Color.Transparent;
             this.label20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label20.Location = new System.Drawing.Point(444, 186);
+            this.label20.Location = new System.Drawing.Point(263, 190);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(30, 17);
             this.label20.TabIndex = 19;
@@ -279,7 +282,7 @@ partial class Form1
             this.label21.AutoSize = true;
             this.label21.BackColor = System.Drawing.Color.Transparent;
             this.label21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label21.Location = new System.Drawing.Point(516, 363);
+            this.label21.Location = new System.Drawing.Point(329, 305);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(30, 17);
             this.label21.TabIndex = 20;
@@ -312,7 +315,7 @@ partial class Form1
             this.label26.AutoSize = true;
             this.label26.BackColor = System.Drawing.Color.Transparent;
             this.label26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label26.Location = new System.Drawing.Point(1240, 254);
+            this.label26.Location = new System.Drawing.Point(403, 490);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(30, 17);
             this.label26.TabIndex = 27;
@@ -321,26 +324,29 @@ partial class Form1
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.Color.Red;
-            this.label27.Location = new System.Drawing.Point(1240, 288);
+            this.label27.BackColor = System.Drawing.Color.Transparent;
+            this.label27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label27.Location = new System.Drawing.Point(589, 457);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(28, 15);
+            this.label27.Size = new System.Drawing.Size(30, 17);
             this.label27.TabIndex = 28;
             this.label27.Text = "       ";
             // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.BackColor = System.Drawing.Color.Green;
-            this.label28.Location = new System.Drawing.Point(1240, 322);
+            this.label28.BackColor = System.Drawing.Color.Transparent;
+            this.label28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label28.Location = new System.Drawing.Point(280, 481);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(28, 15);
+            this.label28.Size = new System.Drawing.Size(30, 17);
             this.label28.TabIndex = 29;
             this.label28.Text = "       ";
             // 
             // label29
             // 
             this.label29.AutoSize = true;
+            this.label29.BackColor = System.Drawing.Color.Transparent;
             this.label29.Location = new System.Drawing.Point(605, 86);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(91, 15);
@@ -350,7 +356,8 @@ partial class Form1
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(605, 121);
+            this.label30.BackColor = System.Drawing.Color.Transparent;
+            this.label30.Location = new System.Drawing.Point(605, 119);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(124, 15);
             this.label30.TabIndex = 31;
@@ -360,6 +367,7 @@ partial class Form1
             // label31
             // 
             this.label31.AutoSize = true;
+            this.label31.BackColor = System.Drawing.Color.Transparent;
             this.label31.Location = new System.Drawing.Point(605, 155);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(97, 15);
@@ -404,7 +412,7 @@ partial class Form1
             this.label23.AutoSize = true;
             this.label23.BackColor = System.Drawing.Color.Red;
             this.label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label23.Location = new System.Drawing.Point(569, 121);
+            this.label23.Location = new System.Drawing.Point(569, 119);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(30, 17);
             this.label23.TabIndex = 36;
@@ -432,6 +440,39 @@ partial class Form1
             this.label34.TabIndex = 38;
             this.label34.Text = "       ";
             // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.BackColor = System.Drawing.Color.Transparent;
+            this.label35.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label35.Location = new System.Drawing.Point(191, 395);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(30, 17);
+            this.label35.TabIndex = 39;
+            this.label35.Text = "       ";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.BackColor = System.Drawing.Color.Transparent;
+            this.label36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label36.Location = new System.Drawing.Point(215, 254);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(30, 17);
+            this.label36.TabIndex = 40;
+            this.label36.Text = "       ";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Orange;
+            this.button1.Location = new System.Drawing.Point(638, 200);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(84, 50);
+            this.button1.TabIndex = 41;
+            this.button1.Text = "COMENZAR A REPARTIR";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -439,6 +480,9 @@ partial class Form1
             this.BackColor = System.Drawing.Color.DarkGray;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(734, 571);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label36);
+            this.Controls.Add(this.label35);
             this.Controls.Add(this.label34);
             this.Controls.Add(this.label33);
             this.Controls.Add(this.label23);
@@ -517,4 +561,7 @@ partial class Form1
     private Label label23;
     private Label label33;
     private Label label34;
+    private Label label35;
+    private Label label36;
+    private Button button1;
 }
