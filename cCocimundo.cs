@@ -126,7 +126,7 @@ public class cCocimundo {
 
             
         }
-        //ImprimirMatriz(Matriz, numpedidos + 1, volumen + 1);
+        ImprimirMatriz(Matriz, numpedidos + 1, volumen + 1);
         return sublistapedidos; //devuelve la sublista de pedidos
     }
 
