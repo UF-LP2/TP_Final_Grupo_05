@@ -31,10 +31,6 @@ public class cCocimundo {
     ~cCocimundo(){
 
 	}
-	static int max(int a, int b) //maximo entre 2 numeros
-	{
-		return (a > b) ? a : b;
-	}
 	public void AgregarPedido(cPedidos pedido){
 		ListaPedidos.Add(pedido);
 			}
@@ -70,37 +66,46 @@ public class cCocimundo {
 		return distancia;
 	}
     
-    public int Dinamico_Mochila(cVehiculos vehiculo)
+    public List<cPedidos> Dinamico_Mochila(cVehiculos vehiculo)
     {
 	
 		int numpedidos = ListaPedidos.Count();
-
 		int[,] Matriz = new int[numpedidos +1 , vehiculo.getVol_Max() +1]; //Crea una matriz de dimensiones N: numero de pedidos total y M: volumen maximo del vehiculo pasado por parametro
 		List<cPedidos> sublistapedidos = new List<cPedidos>();
-		for (int j = 0; j < numpedidos; j++)
-        {
-			if (ListaPedidos[j].getPrioridad() == ePrioridad.EXPRESS)
-            {
-				sublistapedidos.Add(ListaPedidos[j]); // Hago una sublista de los pedidos express
-				
-            }
-        } 
-		for (int i = 0; i < sublistapedidos.Count(); i++)
+        int value;
+        for (int i = 0; i < numpedidos; i++)
         {
             for (int w = 0; w < vehiculo.getVol_Max(); w++)
             {
                 if (w == 0 || i == 0) //Llena la primer columna y la primer fila de la matriz con 0
-                    Matriz[i, w] = 0;
-                else if (sublistapedidos[i - 1].getVolumen() <= w)
+                { Matriz[i, w] = 0; }
+                else if (ListaPedidos[i - 1].getVolumen() <= w)
+                {
+                    value = ListaPedidos[i - 1].getValue() + Matriz[i - 1, w - (int)ListaPedidos[i - 1].getVolumen()];
 
-                    Matriz[i][w] = max(sublistapedidos[i - 1].getValue() + Matriz[i - 1, w - sublistapedidos[i - 1].getVolumen()],
-                        Matriz[i - 1, w]); // Se obtiene el maximo entre el valor del producto +  el volumen y la posicion anterior de la matriz, se queda con el mas grande
-                else
-                    Matriz[i, w] = Matriz[i - 1, w]; //Si no entra se queda con la posicion anterior de la matriz
+                    if (value > Matriz[i - 1, w])
+                    // Se compara el value entre el valor del producto +  la matriz del (volumen - el peso del objeto anterior)  y la posicion anterior de la matriz
+
+                    {
+                        sublistapedidos.Add(ListaPedidos[i]);
+                        Matriz[i, w] = value;
+                    }
+                    else
+                    {
+                        Matriz[i, w] = Matriz[i - 1, w];
+                    }
+                }
+                else //No entraba en la mochila, se queda con el valor anterior
+                {
+                    Matriz[i, w] = Matriz[i - 1, w];
+                }
+        
             }
+
+            //printf("La ganancia total es [0]", Matriz[i, w]); imprime la ganancia total
         }
-		return Matriz[n][W]; //devuelve la ganancia total de la matriz
-	}
+        return sublistapedidos; //devuelve la sublista de pedidos
+    }
 
 	public List<cPedidos> Distribucion_greedy(cVehiculos Vehiculo)
 	{

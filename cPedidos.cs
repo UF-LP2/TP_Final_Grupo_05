@@ -58,8 +58,8 @@ public class cPedidos {
     public int getValue()
     {
         //El value o valor es independiente, cada objeto tiene su propio valor
-        int promedio = this.peso/this.Prioridad; //El value hace el promedio entre el peso y la prioridad del objeto
-        return value;
+        int promedio = (int)this.peso/(int)this.Prioridad; //El value hace el promedio entre el peso y la prioridad del objeto
+        return promedio;
     }
 	public ePrioridad getPrioridad()
     {
