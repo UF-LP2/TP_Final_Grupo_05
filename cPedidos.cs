@@ -42,7 +42,7 @@ public class cPedidos {
         dimens.largo = largo_;
         dimens.alto = alto_;
         peso = peso_;
-        volumen = (ancho_ * largo_ * alto_) * 0.000001;
+        volumen = Math.Round((ancho_ * largo_ * alto_) * 0.000001);
         TipoArticulo = TipoArticulo_;
         NumPedido = ++contador;
 		Cliente = Cliente_;
@@ -58,7 +58,7 @@ public class cPedidos {
     public int getValue()
     {
         //El value o valor es independiente, cada objeto tiene su propio valor
-        int promedio = ((int)this.peso/(int)this.Prioridad)*10; //El value hace el promedio entre el peso y la prioridad del objeto
+        int promedio = ((int)this.peso/(int)this.Prioridad); //El value hace el promedio entre el peso y la prioridad del objeto
         return promedio;
     }
 	public ePrioridad getPrioridad()
