@@ -28,6 +28,8 @@ public class cCamion : cVehiculos {
         Vol_Max = 10.8; //m3
         distanciarecorrida = 0;
         preciocomb = 71.23; //pesos por litro de GNC
+        VolActual = 0;
+        PesoActual = 0;
     }
 
 	~cCamion(){

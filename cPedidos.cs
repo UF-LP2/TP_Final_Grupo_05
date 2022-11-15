@@ -52,7 +52,7 @@ public class cPedidos {
     ~cPedidos(){
 
 	}
-
+    public double getpeso() { return peso; }
     public double getPrecio() { return Precio; }
     public double getVolumen() { return volumen; }
     public int getValue()

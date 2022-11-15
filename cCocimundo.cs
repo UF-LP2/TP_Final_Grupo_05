@@ -13,6 +13,8 @@ using System.IO;
 using System.Xml.Schema;
 using System.Security.Cryptography.X509Certificates;
 using System.Linq;
+using System.Collections;
+using System.Drawing.Drawing2D;
 
 public class cCocimundo {
 
@@ -35,7 +37,11 @@ public class cCocimundo {
 
     
 	}
-    public void LlenarMochila(int[,] matriz, int fila, int columna, List<cPedidos> sublista)
+
+    //public void LlenarMochila(int[,] matriz, int fila, int columna, List<cPedidos> sublista)
+
+    /*
+    public void ImprimirMatriz(int[,] matriz, int fila, int columna)
     {
         // Se queda con lo que le genera mas ganancia
         int max = 0;
@@ -62,7 +68,7 @@ public class cCocimundo {
         }
       
 
-    }
+    }*/
 	public void AgregarPedido(cPedidos pedido){
 		ListaPedidos.Add(pedido);
 			}
@@ -100,16 +106,16 @@ public class cCocimundo {
     
     public List<cPedidos> Dinamico_Mochila(cVehiculos vehiculo)
     {
-	
 		int numpedidos = ListaPedidos.Count();
-        int volumen = vehiculo.getVol_Max();
+        double cargaMax = vehiculo.getCarga_Max();
+        double volumenMax= vehiculo.getVol_Max();
 
         int[,] Matriz = new int[numpedidos +1 , vehiculo.getVol_Max() +1]; //Crea una matriz de dimensiones N: numero de pedidos total y M: volumen maximo del vehiculo pasado por parametro
 		List<cPedidos> sublistapedidos = new List<cPedidos>();
         int value;
-        for (int i = 0; i < numpedidos; i++)
+        for (int i = 0; i < numpedidos + 1; i++)
         {
-            for (int w = 0; w < volumen; w++)
+            for (int w = 0; w < vehiculo.getVol_Max() + 1; w++)
             {
                 if (w == 0 || i == 0) //Llena la primer columna y la primer fila de la matriz con 0
                 {
@@ -118,10 +124,8 @@ public class cCocimundo {
                 else if (ListaPedidos[i - 1].getVolumen() <= w)
                 {
                     value = ListaPedidos[i - 1].getValue() + Matriz[i - 1, w - (int)(ListaPedidos[i - 1].getVolumen())];
-
                     if (value > Matriz[i - 1, w])
                     // Se compara el value entre el valor del producto +  la matriz del (volumen - el peso del objeto anterior)  y la posicion anterior de la matriz
-
                     {
                         Matriz[i, w] = value;
                     }
@@ -134,18 +138,86 @@ public class cCocimundo {
                 {
                     Matriz[i, w] = Matriz[i - 1, w];
                 }
-        
-            }
-
-            
+            }  
         }
-        LlenarMochila(Matriz, numpedidos + 1, volumen + 1, sublistapedidos);
+
+        sublistapedidos = RecorridoMatriz(Matriz, vehiculo);
+        sublistapedidos = complemento_llenado_dinamico(sublistapedidos, vehiculo);
         return sublistapedidos; //devuelve la sublista de pedidos
     }
 
-	public List<cPedidos> Distribucion_greedy(List<cPedidos>ListaAOrdenar, cVehiculos Vehiculo)
+    public List<cPedidos> RecorridoMatriz(int[,] matriz, cVehiculos vehiculo)
+        {
+            List<cPedidos> lista_aux = new List<cPedidos>();
+
+            float res = matriz[ListaPedidos.Count(), (int)vehiculo.getVol_Max()];
+            int l = ListaPedidos.Count();
+            int j = (int)vehiculo.getVol_Max();
+
+            while (l > 0 && j > 0)
+            {
+                if (matriz[l, j] == matriz[l - 1, j])
+                {
+                    l--;
+                    continue;
+                }
+                else
+                {
+                    lista_aux.Add(ListaPedidos[l - 1]);
+                    j = j - (int)ListaPedidos[l - 1].getVolumen();
+                    vehiculo.setVolActual(ListaPedidos[l - 1].getVolumen());
+                    ListaPedidos.Remove(ListaPedidos[l - 1]);
+                    l--;
+                }
+            }
+
+            return lista_aux;
+
+        }
+
+       public List<cPedidos> complemento_llenado_dinamico(List<cPedidos> lista_llenado, cVehiculos vehiculo)
+        {
+            List<cPedidos> lista_aux = new List<cPedidos>();
+
+
+            lista_llenado.Reverse();
+
+            while(lista_llenado.Count() != 0)
+            {
+                if (lista_llenado[lista_llenado.Count()-1].getpeso() + vehiculo.getPesoActual() < vehiculo.getCarga_Max()) //comparamos solo el peso porque ya sabemos que va a estar bien de volumen (la lista_llenado es la optima en cuanto a volumen)
+                {
+                    lista_aux.Add(lista_llenado[lista_llenado.Count()-1]);
+                    vehiculo.setPesoActual(lista_llenado[lista_llenado.Count() - 1].getpeso());
+                    lista_llenado.Remove(lista_llenado[lista_llenado.Count() - 1]);
+                }
+                else
+                {
+                    ListaPedidos.Add(lista_llenado[lista_llenado.Count() - 1]);
+                    lista_llenado.Remove(lista_llenado[lista_llenado.Count() - 1]);
+                }
+            }
+            //si queda peso y volumen disponible en el vehiculo, nos fijamos que elementos de la lista general de todos los pedidios pueden entrar en el vehiculo
+            if(vehiculo.getPesoActual()<vehiculo.getCarga_Max() && vehiculo.getVolActual()<vehiculo.getVol_Max() && ListaPedidos.Count > 0)
+            {
+                for (int i = 0; i < ListaPedidos.Count(); i++)
+                {
+                    if (ListaPedidos[i].getpeso() + vehiculo.getPesoActual() < vehiculo.getCarga_Max() && ListaPedidos[i].getVolumen() + vehiculo.getVolActual() < vehiculo.getVol_Max())
+                    {
+                        lista_aux.Add(ListaPedidos[i]);
+                        vehiculo.setPesoActual(ListaPedidos[i].getpeso());
+                        vehiculo.setVolActual(ListaPedidos[i].getVolumen());
+                        ListaPedidos.Remove(ListaPedidos[i]);
+                        i = i - 1;
+                    }
+                }
+            }
+            return lista_aux;
+        }
+
+    public List<cPedidos> Distribucion_greedy(List<cPedidos>ListaAOrdenar, cVehiculos Vehiculo)
 	{
 		List<cPedidos> ListaOrdenada = new List<cPedidos>();
+        Vehiculo.setdistanciarecorrida(0);
 		int pos = 0, cant = ListaAOrdenar.Count;
 		double distancia = 0, distancia_total = 0;
 		for(int j = 0; j< cant; j++)
@@ -358,9 +430,9 @@ public class cCocimundo {
         cCamion Furgon = new cCamion();
         cFurgoneta Furgoneta = new cFurgoneta();
         cCamioneta Camioneta = new cCamioneta();
-        ListaVehiculos.Add(Furgon);
-        ListaVehiculos.Add(Furgoneta);
         ListaVehiculos.Add(Camioneta);
+        ListaVehiculos.Add(Furgoneta);
+        ListaVehiculos.Add(Furgon);
     }
 }//end cCocimundo
 

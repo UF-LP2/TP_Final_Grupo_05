@@ -28,6 +28,8 @@ public class cFurgoneta : cVehiculos {
         Vol_Max = dimens_vehiculo.ancho * dimens_vehiculo.largo * dimens_vehiculo.alto; //m3
         distanciarecorrida = 0;
         preciocomb = 155.9; //pesos por litro
+        VolActual = 0;
+        PesoActual = 0;
     }
 
 	~cFurgoneta(){

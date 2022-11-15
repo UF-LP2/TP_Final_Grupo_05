@@ -23,13 +23,13 @@ static class Program
         {
             Console.WriteLine(Cocimundo.ListaPedidos[i].to_String());
         }
-        for(int i = 0;i< Cocimundo.ListaVehiculos.Count;i++)
-        {
+        //for(int i = 0;i< Cocimundo.ListaVehiculos.Count;i++) //no lo dejo porque entran todos los objetos en un solo vehiculo
+       // {
             //se hace el algoritmo de guardado dinamico
-            PedidosASalir = Cocimundo.Dinamico_Mochila(Cocimundo.ListaVehiculos[i]);
+            PedidosASalir = Cocimundo.Dinamico_Mochila(Cocimundo.ListaVehiculos[0]);
 
             //se hace el algoritmo de distribucion
-            PedidosASalir = Cocimundo.Distribucion_greedy(PedidosASalir, Cocimundo.ListaVehiculos[i]);
+            PedidosASalir = Cocimundo.Distribucion_greedy(PedidosASalir, Cocimundo.ListaVehiculos[0]);
 
             //se cuenta el dinero ganado y se suma a la caja de cocimundo
             for (int j = 0; j < PedidosASalir.Count; j++)
@@ -49,12 +49,12 @@ static class Program
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1(PedidosASalir));
-        }
+        //}
         
         //se hacee un recuento de la plata y se saca el neto, y se decrementa en 1 el tiempo de prioridades
         Cocimundo.FinalDelDia();
 
-        
+        return;
     }    
  
 }

@@ -24,6 +24,8 @@ public class cVehiculos {
 	protected double Vol_Max;
     protected double distanciarecorrida;
     protected double preciocomb;
+    protected double VolActual;
+    protected double PesoActual;
 
 	public cVehiculos(){
 
@@ -32,10 +34,15 @@ public class cVehiculos {
 	~cVehiculos(){
 
 	}
+    public void setPesoActual(double peso) { PesoActual = peso; }
+    public double getPesoActual() { return PesoActual; }
+    public void setVolActual(double Vol) { VolActual = Vol; }
+    public double getVolActual() { return VolActual; }
     public double getconsumo() { return Consumo; }
     public double getCapMaxComb() { return Capacidad_Max_Combustible; }
     public double getdistanciarecorrida() { return distanciarecorrida; }
     public void setdistanciarecorrida(double distancia) { distanciarecorrida = distancia; }
+    public double getCarga_Max() { return Peso_Max; }
 
     public double getpreciocomb() { return preciocomb; }
     /// 

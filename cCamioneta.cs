@@ -28,6 +28,8 @@ public class cCamioneta : cVehiculos {
         Vol_Max = dimens_vehiculo.ancho * dimens_vehiculo.largo * dimens_vehiculo.alto; //m3
         distanciarecorrida = 0;
         preciocomb = 145.10; //pesos por litro de GNC
+        VolActual = 0;
+        PesoActual = 0;
     }
 
 	~cCamioneta(){
