@@ -129,27 +129,27 @@ public class cCocimundo {
         return sublistapedidos; //devuelve la sublista de pedidos
     }
 
-	public List<cPedidos> Distribucion_greedy(cVehiculos Vehiculo)
+	public List<cPedidos> Distribucion_greedy(List<cPedidos>ListaAOrdenar, cVehiculos Vehiculo)
 	{
 		List<cPedidos> ListaOrdenada = new List<cPedidos>();
-		int pos = 0, cant = ListaPedidos.Count;
+		int pos = 0, cant = ListaAOrdenar.Count;
 		double distancia = 0, distancia_total = 0;
 		for(int j = 0; j< cant; j++)
 		{
 			if(j == 0)
 			{
-				distancia = funcionDistancia(ListaPedidos[j], ListaPedidos[j]);
+				distancia = funcionDistancia(ListaAOrdenar[j], ListaAOrdenar[j]);
 				pos = j;
-				for(int i = 0; i<ListaPedidos.Count;i++)
+				for(int i = 0; i< ListaAOrdenar.Count;i++)
 				{
-					if (distancia > funcionDistancia(ListaPedidos[i], ListaPedidos[i]))
+					if (distancia > funcionDistancia(ListaAOrdenar[i], ListaAOrdenar[i]))
 					{
-                        distancia = funcionDistancia(ListaPedidos[i], ListaPedidos[i]);
+                        distancia = funcionDistancia(ListaAOrdenar[i], ListaAOrdenar[i]);
 						pos = i;
                     }
                 }
-				ListaOrdenada.Add(ListaPedidos[pos]);
-				ListaPedidos.Remove(ListaPedidos[pos]);
+				ListaOrdenada.Add(ListaAOrdenar[pos]);
+                ListaAOrdenar.Remove(ListaAOrdenar[pos]);
                 distancia_total += distancia;
 
             }
@@ -157,16 +157,16 @@ public class cCocimundo {
 			{
                 distancia = 99999999999;
                 pos = j;
-                for (int i = 0; i < ListaPedidos.Count; i++)
+                for (int i = 0; i < ListaAOrdenar.Count; i++)
                 {
-                    if (distancia > funcionDistancia(ListaOrdenada.Last(), ListaPedidos[i]))
+                    if (distancia > funcionDistancia(ListaOrdenada.Last(), ListaAOrdenar[i]))
                     {
-                        distancia = funcionDistancia(ListaOrdenada.Last(), ListaPedidos[i]);
+                        distancia = funcionDistancia(ListaOrdenada.Last(), ListaAOrdenar[i]);
                         pos = i;
                     }
                 }
-                ListaOrdenada.Add(ListaPedidos[pos]);
-                ListaPedidos.Remove(ListaPedidos[pos]);
+                ListaOrdenada.Add(ListaAOrdenar[pos]);
+                ListaAOrdenar.Remove(ListaAOrdenar[pos]);
                 distancia_total += distancia;
             }
         }
