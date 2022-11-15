@@ -1,6 +1,6 @@
 # TP Final - Grupo `05`
 ### Consigna
-    UF-LP2/TP_Final_Grupo_05/tp.pdf
+    [Contribution guidelines for this project](UF-LP2/TP_Final_Grupo_05/TP-LII-2022.pdf)
 ### Descripción
     Logistica y distribución de electrodomésticos
 ### Integrantes
