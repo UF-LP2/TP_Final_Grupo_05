@@ -109,7 +109,6 @@ public class cCocimundo {
                     // Se compara el value entre el valor del producto +  la matriz del (volumen - el peso del objeto anterior)  y la posicion anterior de la matriz
 
                     {
-                        sublistapedidos.Add(ListaPedidos[i]);
                         Matriz[i, w] = value;
                     }
                     else
