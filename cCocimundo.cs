@@ -69,13 +69,13 @@ public class cCocimundo {
 				+ Math.Pow(hasta.Cliente.m_cUbicacion.getY() - desde.Cliente.m_cUbicacion.getY(), 2));
 		return distancia;
 	}
-    /*
+    
     public int Dinamico_Mochila(cVehiculos vehiculo)
     {
 	
 		int numpedidos = ListaPedidos.Count();
 
-		int[,] Matriz = new int[numpedidos + 1, vehiculo.getVol_Max()];
+		int[,] Matriz = new int[numpedidos +1 , vehiculo.getVol_Max() +1]; //Crea una matriz de dimensiones N: numero de pedidos total y M: volumen maximo del vehiculo pasado por parametro
 		List<cPedidos> sublistapedidos = new List<cPedidos>();
 		for (int j = 0; j < numpedidos; j++)
         {
@@ -87,19 +87,20 @@ public class cCocimundo {
         } 
 		for (int i = 0; i < sublistapedidos.Count(); i++)
         {
-			for (int w = 0; w< ListaVehiculos.volumen(); w++)//chequear
+            for (int w = 0; w < vehiculo.getVol_Max(); w++)
             {
-				if (w == 0 || i == 0)
-					Matriz[i,w] = 0;
-				else if (sublistapedidos[i - 1]. <= w)
+                if (w == 0 || i == 0) //Llena la primer columna y la primer fila de la matriz con 0
+                    Matriz[i, w] = 0;
+                else if (sublistapedidos[i - 1].getVolumen() <= w)
 
-					Matriz[i][w] = max(Matriz[i - 1, w - wt[i - 1]], Matriz[i - 1, w]);
-				else
-					Matriz[i, w] = Matriz[i - 1, w];
+                    Matriz[i][w] = max(sublistapedidos[i - 1].getValue() + Matriz[i - 1, w - sublistapedidos[i - 1].getVolumen()],
+                        Matriz[i - 1, w]); // Se obtiene el maximo entre el valor del producto +  el volumen y la posicion anterior de la matriz, se queda con el mas grande
+                else
+                    Matriz[i, w] = Matriz[i - 1, w]; //Si no entra se queda con la posicion anterior de la matriz
             }
         }
-		return Matriz[n][W];
-	}*/
+		return Matriz[n][W]; //devuelve la ganancia total de la matriz
+	}
 
 	public List<cPedidos> Distribucion_greedy(cVehiculos Vehiculo)
 	{
