@@ -14,10 +14,21 @@ using System.IO;
 
 
 public class cCamion : cVehiculos {
-
-	public cCamion(){
-
-	}
+    
+    public cCamion(){
+		Cant_Viajes = 1;
+		Capacidad_Max_Combustible = 70;
+		Carga_Util = 4900; //kg
+		Consumo = 0.08904; //litros de GNC por km
+        dimens_vehiculo.ancho = 1.800;//m
+        dimens_vehiculo.largo = 3.000; //m
+        dimens_vehiculo.alto = 1.900; //m
+        Peso_Max = 4900; //kg
+        Viajes_Realizados = 0;
+        Vol_Max = 10.8; //m3
+        distanciarecorrida = 0;
+        preciocomb = 71.23; //pesos por litro de GNC
+    }
 
 	~cCamion(){
 

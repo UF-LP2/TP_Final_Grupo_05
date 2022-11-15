@@ -16,8 +16,19 @@ using System.IO;
 public class cCamioneta : cVehiculos {
 
 	public cCamioneta(){
-
-	}
+        Cant_Viajes = 4;
+        Capacidad_Max_Combustible = 50;
+        Carga_Util = 750; //kg
+        Consumo = 0.099; //litros de GNC por km
+        dimens_vehiculo.ancho = 1.441; //m
+        dimens_vehiculo.largo = 3.092; //m
+        dimens_vehiculo.alto = 1.233; //m
+        Peso_Max = 750; //kg
+        Viajes_Realizados = 0;
+        Vol_Max = dimens_vehiculo.ancho * dimens_vehiculo.largo * dimens_vehiculo.alto; //m3
+        distanciarecorrida = 0;
+        preciocomb = 145.10; //pesos por litro de GNC
+    }
 
 	~cCamioneta(){
 

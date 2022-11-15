@@ -28,17 +28,6 @@ public class cCocimundo {
     public void MasDinero(double entrante) { Dinero += entrante; }
     public void MenosDinero(double saliente) { Dinero -= saliente; }
 
-    /*
-    public double NaftadelVjaje(List<cPedidos> PedidosASalir)
-    {
-        double TotalNafta = 0;
-        for(int i = 0; i< PedidosASalir.Count;i++)
-        {
-            TotalNafta += PedidosASalir.
-        }
-        return TotalNafta;
-    }*/
-
     ~cCocimundo(){
 
 	}
@@ -60,9 +49,11 @@ public class cCocimundo {
 		{
 			ListaPedidos[i].ModificarPrioridad();
         }
-	}
+        Console.WriteLine("\n\n\nEl dinero final fue de: {0} pesos, la ganancia neta total fue de: {1} pesos", Convert.ToString(Dinero), Convert.ToString(Dinero - 1000000));
 
-	public double funcionDistancia(cPedidos desde, cPedidos hasta)
+    }
+
+    public double funcionDistancia(cPedidos desde, cPedidos hasta)
 	{
 		double distancia = 0;
 		if (desde.Cliente.m_cUbicacion.GetBarrio() == hasta.Cliente.m_cUbicacion.GetBarrio())
@@ -107,11 +98,11 @@ public class cCocimundo {
 		return Matriz[n][W];
 	}*/
 
-	public List<cPedidos> Distribucion_greedy(/*cVehiculo Vehiculo*/)
+	public List<cPedidos> Distribucion_greedy(cVehiculos Vehiculo)
 	{
 		List<cPedidos> ListaOrdenada = new List<cPedidos>();
 		int pos = 0, cant = ListaPedidos.Count;
-		double distancia = 0/*, distancia_total = 0*/;
+		double distancia = 0, distancia_total = 0;
 		for(int j = 0; j< cant; j++)
 		{
 			if(j == 0)
@@ -128,7 +119,7 @@ public class cCocimundo {
                 }
 				ListaOrdenada.Add(ListaPedidos[pos]);
 				ListaPedidos.Remove(ListaPedidos[pos]);
-                //distancia_total += distancia;
+                distancia_total += distancia;
 
             }
             else
@@ -145,12 +136,18 @@ public class cCocimundo {
                 }
                 ListaOrdenada.Add(ListaPedidos[pos]);
                 ListaPedidos.Remove(ListaPedidos[pos]);
-                //distancia_total += distancia;
+                distancia_total += distancia;
             }
         }
-        //vehiculo.distanciarecorrida = distancia_total + funciondistancia(ListaOrdenada.Last(), ListaOrdenada.Last());
+        Vehiculo.setdistanciarecorrida(distancia_total + funcionDistancia(ListaOrdenada.Last(), ListaOrdenada.Last()));
 		return ListaOrdenada;
 	}
+
+    public double NaftadelVjaje(cVehiculos Vehiculo)
+    {
+        return Vehiculo.getdistanciarecorrida() * Vehiculo.getconsumo();
+
+    }
     public void CargarPedidos()
     {
 #region Ubicaciones
@@ -311,5 +308,14 @@ public class cCocimundo {
         return;
     }
 
+    public void crearvehiculos()
+    {
+        cCamion Furgon = new cCamion();
+        cFurgoneta Furgoneta = new cFurgoneta();
+        cCamioneta Camioneta = new cCamioneta();
+        ListaVehiculos.Add(Furgon);
+        ListaVehiculos.Add(Furgoneta);
+        ListaVehiculos.Add(Camioneta);
+    }
 }//end cCocimundo
 

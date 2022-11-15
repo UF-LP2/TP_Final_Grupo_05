@@ -15,14 +15,15 @@ using System.IO;
 public class cVehiculos {
 
     protected int Cant_Viajes;
-    protected float Capacidad_Max_Combustible;
+    protected double Capacidad_Max_Combustible;
     protected float Carga_Util;
     protected double Consumo;
     protected Dimensiones dimens_vehiculo;
     protected float Peso_Max;
     protected int Viajes_Realizados;
 	protected double Vol_Max;
-    //protected double distanciarecorrida;
+    protected double distanciarecorrida;
+    protected double preciocomb;
 
 	public cVehiculos(){
 
@@ -31,10 +32,15 @@ public class cVehiculos {
 	~cVehiculos(){
 
 	}
+    public double getconsumo() { return Consumo; }
+    public double getCapMaxComb() { return Capacidad_Max_Combustible; }
+    public double getdistanciarecorrida() { return distanciarecorrida; }
+    public void setdistanciarecorrida(double distancia) { distanciarecorrida = distancia; }
 
-	/// 
-	/// <param name="pedido"></param>
-	public void CargarVehiculo(cPedidos pedido){
+    public double getpreciocomb() { return preciocomb; }
+    /// 
+    /// <param name="pedido"></param>
+    public void CargarVehiculo(cPedidos pedido){
 
 
 	}
