@@ -12,6 +12,7 @@ using System.Text;
 using System.IO;
 using System.Xml.Schema;
 using System.Security.Cryptography.X509Certificates;
+using System.Linq;
 
 public class cCocimundo {
 
@@ -34,19 +35,24 @@ public class cCocimundo {
 
     
 	}
-    public void ImprimirMatriz(int[,] matriz, int fila, int columna)
+    public void LlenarMochila(int[,] matriz, int fila, int columna, List<cPedidos> sublista, List<cPedidos> Lista)
     {
-        Console.WriteLine("Matriz");
+        // Se queda con lo que le genera mas ganancia
+        int max = 0;
         for(int i = 0; i < fila; i++)
         {
-        
             for (int j = 0; j < columna; j++)
             {
-                Console.WriteLine(matriz[i,j]);
-               
+                if (matriz[i,j] != 0) // no cuento si es 0
+                { 
+                    if(max < matriz[i,j])
+                    {
+                        max = matriz[i, j];
+                    }
+                }
             }
-           
         }
+        Console.WriteLine(max);
        
     }
 	public void AgregarPedido(cPedidos pedido){
@@ -125,7 +131,7 @@ public class cCocimundo {
 
             
         }
-        ImprimirMatriz(Matriz, numpedidos + 1, volumen + 1);
+        LlenarMochila(Matriz, numpedidos + 1, volumen + 1, sublistapedidos, ListaPedidos);
         return sublistapedidos; //devuelve la sublista de pedidos
     }
 
