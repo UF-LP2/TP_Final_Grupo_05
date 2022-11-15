@@ -39,26 +39,36 @@ public class cCocimundo {
 	}
 
 	public void FinalDelDia(){
-		for(int i = 0; i < ListaPedidos.Count(); i++)
-        {
-			ListaPedidos.ModificarPrioridad();
+		for (int i = 0; i < ListaPedidos.Count(); i++)
+		{
+			ListaPedidos[i].ModificarPrioridad();
         }
 	}
 
-	/*public cPedido QuitarPedido(){
+	public double funcionDistancia(cPedidos desde, cPedidos hasta)
+	{
+		double distancia = 0;
+		if (desde == null)
+			distancia = Math.Sqrt(Math.Pow(hasta.Cliente.m_cUbicacion.getX(), 2) + Math.Pow(hasta.Cliente.m_cUbicacion.getY(), 2));
+		else
+			distancia = Math.Sqrt(Math.Pow(hasta.Cliente.m_cUbicacion.getX() - desde.Cliente.m_cUbicacion.getX(), 2) 
+				+ Math.Pow(hasta.Cliente.m_cUbicacion.getY() - desde.Cliente.m_cUbicacion.getY(), 2));
+		return distancia;
+	}
+    /*public cPedido QuitarPedido(){
 
 		return null; 
 	}*/
-	public int Dinamico_Mochila(cVehiculos vehiculo)
+    public int Dinamico_Mochila(cVehiculos vehiculo)
     {
 	
 		int numpedidos = ListaPedidos.Count();
 
-		int[,] Matriz = new int[numpedidos + 1, ListaVehiculos.Volumen()];
-		List<cPedidos> sublistapedidos;
+		int[,] Matriz = new int[numpedidos + 1, vehiculo.getVol_Max()];
+		List<cPedidos> sublistapedidos = new List<cPedidos>();
 		for (int j = 0; j < numpedidos; j++)
         {
-			if (ListaPedidos[j].getPrioridad == "express")
+			if (ListaPedidos[j].getPrioridad == ePrioridad.EXPRESS)
             {
 				sublistapedidos.Add(ListaPedidos[j]); // Hago una sublista de los pedidos express
 				
@@ -79,4 +89,156 @@ public class cCocimundo {
         }
 		return Matriz[n][W];
 	}
+
+	public List<cPedidos> Distribucion_greedy(List<cPedidos> ListaPedidos)
+	{
+		List<cPedidos> ListaOrdenada = new List<cPedidos>();
+		int x = 0, y = 0, pos = 0;
+		double distancia = 0;
+		for(int j = 0; j< ListaPedidos.Count; j++)
+		{
+			if(j == 0)
+			{
+				distancia = funcionDistancia(null, ListaPedidos[j]);
+				pos = j;
+				for(int i = 0; i<ListaPedidos.Count;i++)
+				{
+					if (distancia > funcionDistancia(null, ListaPedidos[i]))
+					{
+                        distancia = funcionDistancia(null, ListaPedidos[i]);
+						pos = i;
+                    }
+                }
+				ListaOrdenada.Add(ListaPedidos[pos]);
+				ListaPedidos.Remove(ListaPedidos[pos]);
+			}
+			else
+			{
+                distancia = 99999999999;
+                distancia = funcionDistancia(ListaOrdenada.Last(), ListaPedidos[j]);
+                pos = j;
+                for (int i = 0; i < ListaPedidos.Count; i++)
+                {
+                    if (distancia > funcionDistancia(ListaOrdenada.Last(), ListaPedidos[i]))
+                    {
+                        distancia = funcionDistancia(ListaOrdenada.Last(), ListaPedidos[i]);
+                        pos = i;
+                    }
+                }
+                ListaOrdenada.Add(ListaPedidos[pos]);
+                ListaPedidos.Remove(ListaPedidos[pos]);
+            }
+        }
+		return ListaOrdenada;
+	}
+    public void CargarPedidos(cPedidos pedidos)
+    {
+#region Ubicaciones
+        cUbicacion Comuna1 = new cUbicacion(eBarrio.Comuna_1);
+        cUbicacion Comuna2 = new cUbicacion(eBarrio.Comuna_2);
+        cUbicacion Comuna3 = new cUbicacion(eBarrio.Comuna_3);
+        cUbicacion Comuna4 = new cUbicacion(eBarrio.Comuna_4);
+        cUbicacion Comuna5 = new cUbicacion(eBarrio.Comuna_5);
+        cUbicacion Comuna6 = new cUbicacion(eBarrio.Comuna_6);
+        cUbicacion Comuna7 = new cUbicacion(eBarrio.Comuna_7);
+        cUbicacion Comuna8 = new cUbicacion(eBarrio.Comuna_8);
+        cUbicacion Comuna9 = new cUbicacion(eBarrio.Comuna_9);
+        cUbicacion Comuna10 = new cUbicacion(eBarrio.Comuna_10);
+        cUbicacion Comuna11 = new cUbicacion(eBarrio.Comuna_11);
+        cUbicacion Comuna12 = new cUbicacion(eBarrio.Comuna_12);
+        cUbicacion Comuna13 = new cUbicacion(eBarrio.Comuna_13);
+        cUbicacion Comuna14 = new cUbicacion(eBarrio.Comuna_14);
+        cUbicacion Comuna15 = new cUbicacion(eBarrio.Comuna_15);
+        cUbicacion VicenteLopez = new cUbicacion(eBarrio.VicenteLopez);
+        cUbicacion SanIsidro = new cUbicacion(eBarrio.SanIsidro);
+        cUbicacion SanMartin = new cUbicacion(eBarrio.SanMartin);
+        cUbicacion TresdeFebrero = new cUbicacion(eBarrio.TresdeFebrero);
+        cUbicacion Moron = new cUbicacion(eBarrio.Moron);
+        cUbicacion LaMatanza = new cUbicacion(eBarrio.LaMatanza);
+        cUbicacion LomasdeZamora = new cUbicacion(eBarrio.LomasdeZAmora);
+        cUbicacion Lanus = new cUbicacion(eBarrio.Lanus);
+        cUbicacion Avellaneda = new cUbicacion(eBarrio.Avellaneda);
+#endregion
+
+#region clientes
+        cCliente Cliente1 = new cCliente("Juan Perez", "11111111", Comuna1);
+        cCliente Cliente2 = new cCliente("Santiago Gambach", "22222222", Comuna2);
+        cCliente Cliente3 = new cCliente("Tomas Conde", "33333333", Comuna3);
+        cCliente Cliente4 = new cCliente("Silvia Paterno", "44444444", Comuna4);
+        cCliente Cliente5 = new cCliente("Joaquin Conde", "55555555", Comuna5);
+        cCliente Cliente6 = new cCliente("Estaban Quito", "6666666", Comuna6);
+        cCliente Cliente7 = new cCliente("Broco Lee", "77777777", Comuna7);
+        cCliente Cliente8 = new cCliente("Aquiles Bailoyo", "88888888", Comuna8);
+        cCliente Cliente9 = new cCliente("Aquiles Vaesa", "99999999", Comuna9);
+        cCliente Cliente10 = new cCliente("Taylor Swift", "12121212", Comuna10);
+        cCliente Cliente11 = new cCliente("Matias Ducombs", "23232323", Comuna11);
+        cCliente Cliente12 = new cCliente("Juanes", "34343434", Comuna12);
+        cCliente Cliente13 = new cCliente("Wos", "45454545", Comuna13);
+        cCliente Cliente14 = new cCliente("Nicolas Villavicencio", "56565656", Comuna14);
+        cCliente Cliente15 = new cCliente("Nicolas Del Canio", "67676767", Comuna15);
+        cCliente Cliente16 = new cCliente("Sergio Massa", "78787878", VicenteLopez);
+        cCliente Cliente17 = new cCliente("Messi Messi", "89898989", SanIsidro);
+        cCliente Cliente18 = new cCliente("Sergio Aguero", "90909090", SanMartin);
+        cCliente Cliente19 = new cCliente("Juana Perez", "01010101", TresdeFebrero);
+        cCliente Cliente20 = new cCliente("Juan Francisco Perez", "00001111", Moron);
+        cCliente Cliente21 = new cCliente("Juan Manuel Perez", "11112222", LaMatanza);
+        cCliente Cliente22 = new cCliente("Santiago Gonzalez", "98765432", LomasdeZamora);
+        cCliente Cliente23 = new cCliente("Nicolas Berli", "1234578", Lanus);
+        cCliente Cliente24 = new cCliente("Alejo Alvarez", "98761234", Avellaneda);
+#endregion
+
+#region Pedidos
+        cPedidos Pedido1 = new cPedidos(Cliente1, ePrioridad.EXPRESS, "Monitor");
+        cPedidos Pedido2 = new cPedidos(Cliente2, ePrioridad.NORMAL, "Impresora");
+        cPedidos Pedido3 = new cPedidos(Cliente3, ePrioridad.DIFERIDO, "Televisor 55");
+        cPedidos Pedido4 = new cPedidos(Cliente4, ePrioridad.EXPRESS, "Termotanque");
+        cPedidos Pedido5 = new cPedidos(Cliente5, ePrioridad.NORMAL, "Monitor");
+        cPedidos Pedido6 = new cPedidos(Cliente6, ePrioridad.DIFERIDO, "Secarropas");
+        cPedidos Pedido7 = new cPedidos(Cliente7, ePrioridad.EXPRESS, "Heladera");
+        cPedidos Pedido8 = new cPedidos(Cliente8, ePrioridad.NORMAL, "Molinillo de Cafe");
+        cPedidos Pedido9 = new cPedidos(Cliente9, ePrioridad.DIFERIDO, "Mouse");
+        cPedidos Pedido10 = new cPedidos(Cliente10, ePrioridad.EXPRESS, "Webcam");
+        cPedidos Pedido11 = new cPedidos(Cliente11, ePrioridad.NORMAL, "Televisor 50");
+        cPedidos Pedido12 = new cPedidos(Cliente12, ePrioridad.DIFERIDO, "Televisor 80");
+        cPedidos Pedido13 = new cPedidos(Cliente13, ePrioridad.EXPRESS, "Televisor 40");
+        cPedidos Pedido14 = new cPedidos(Cliente14, ePrioridad.NORMAL, "Cafetera");
+        cPedidos Pedido15 = new cPedidos(Cliente15, ePrioridad.DIFERIDO, "Heladera");
+        cPedidos Pedido16 = new cPedidos(Cliente16, ePrioridad.EXPRESS, "Computadora Personal");
+        cPedidos Pedido17 = new cPedidos(Cliente17, ePrioridad.NORMAL, "Teclado");
+        cPedidos Pedido18 = new cPedidos(Cliente18, ePrioridad.DIFERIDO, "Licuadora");
+        cPedidos Pedido19 = new cPedidos(Cliente19, ePrioridad.EXPRESS, "Televisor 42");
+        cPedidos Pedido20 = new cPedidos(Cliente20, ePrioridad.NORMAL, "Computadora Personal");
+        cPedidos Pedido21 = new cPedidos(Cliente21, ePrioridad.DIFERIDO, "Termotanque"); 
+        cPedidos Pedido22 = new cPedidos(Cliente22, ePrioridad.EXPRESS, "Freezer");
+        cPedidos Pedido23 = new cPedidos(Cliente23, ePrioridad.NORMAL, "Lavarropas");
+        cPedidos Pedido24 = new cPedidos(Cliente24, ePrioridad.DIFERIDO, "Tostadora");
+        cPedidos Pedido25 = new cPedidos(Cliente1, ePrioridad.NORMAL, "Monitor");
+        cPedidos Pedido26 = new cPedidos(Cliente2, ePrioridad.NORMAL, "Impresora");
+        cPedidos Pedido27 = new cPedidos(Cliente3, ePrioridad.DIFERIDO, "Televisor 55");
+        cPedidos Pedido28 = new cPedidos(Cliente4, ePrioridad.DIFERIDO, "Termotanque");
+        cPedidos Pedido29= new cPedidos(Cliente5, ePrioridad.NORMAL, "Monitor");
+        cPedidos Pedido30 = new cPedidos(Cliente6, ePrioridad.DIFERIDO, "Secarropas");
+        cPedidos Pedido31 = new cPedidos(Cliente7, ePrioridad.NORMAL, "Heladera");
+        cPedidos Pedido32 = new cPedidos(Cliente8, ePrioridad.NORMAL, "Molinillo de Cafe");
+        cPedidos Pedido33 = new cPedidos(Cliente9, ePrioridad.DIFERIDO, "Mouse");
+        cPedidos Pedido34 = new cPedidos(Cliente10, ePrioridad.DIFERIDO, "Webcam");
+        cPedidos Pedido35 = new cPedidos(Cliente11, ePrioridad.NORMAL, "Televisor 50");
+        cPedidos Pedido36 = new cPedidos(Cliente12, ePrioridad.DIFERIDO, "Televisor 80");
+        cPedidos Pedido37 = new cPedidos(Cliente13, ePrioridad.NORMAL, "Televisor 40");
+        cPedidos Pedido38 = new cPedidos(Cliente14, ePrioridad.NORMAL, "Cafetera");
+        cPedidos Pedido39 = new cPedidos(Cliente15, ePrioridad.DIFERIDO, "Heladera");
+        cPedidos Pedido40 = new cPedidos(Cliente16, ePrioridad.DIFERIDO, "Computadora Personal");
+        cPedidos Pedido41 = new cPedidos(Cliente17, ePrioridad.NORMAL, "Teclado");
+        cPedidos Pedido42 = new cPedidos(Cliente18, ePrioridad.DIFERIDO, "Licuadora");
+        cPedidos Pedido43 = new cPedidos(Cliente19, ePrioridad.NORMAL, "Televisor 42");
+        cPedidos Pedido44 = new cPedidos(Cliente20, ePrioridad.NORMAL, "Computadora Personal");
+        cPedidos Pedido45 = new cPedidos(Cliente21, ePrioridad.DIFERIDO, "Termotanque");
+        cPedidos Pedido46 = new cPedidos(Cliente22, ePrioridad.DIFERIDO, "Freezer");
+        cPedidos Pedido47 = new cPedidos(Cliente23, ePrioridad.NORMAL, "Lavarropas");
+        cPedidos Pedido48 = new cPedidos(Cliente24, ePrioridad.DIFERIDO, "Tostadora");
+        #endregion
+        return;
+    }
+
 }//end cCocimundo
+

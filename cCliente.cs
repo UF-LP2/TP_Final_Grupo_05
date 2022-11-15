@@ -15,11 +15,14 @@ using System.IO;
 
 public class cCliente {
 
-	private readonly string DNI;
+	private string NomyAp;
+	private  string DNI;
 	public cUbicacion m_cUbicacion;
 
-	public cCliente(){
-
+	public cCliente(string NomyAp_, string DNI_, cUbicacion Ubicacion_){
+		NomyAp = NomyAp_;
+		DNI = DNI_;
+		m_cUbicacion = Ubicacion_;
 	}
 
 	~cCliente(){

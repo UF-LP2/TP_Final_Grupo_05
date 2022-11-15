@@ -15,23 +15,124 @@ using System.IO;
 
 public class cUbicacion {
 
-	private eBarrio Barrio;
-	private float x;
-	private float y;
+	private eBarrio Com_Part;
+	private double x;
+	private double y;
 
-	public cUbicacion(){
-
+	public cUbicacion(eBarrio Barrio){
+		Com_Part = Barrio;
+		switch(Barrio)
+		{
+            case eBarrio.Comuna_1:
+                x = 14.1; //km a comuna 1 (liniers especificamente)
+                y = 1.1;
+                break;
+            case eBarrio.Comuna_2:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_3:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_4:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_5:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_6:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_7:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_8:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_9:
+                x = 0;
+                y = 0;
+                break;
+            case eBarrio.Comuna_10:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_11:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_12:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_13:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_14:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Comuna_15:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.VicenteLopez:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.SanIsidro:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.SanMartin:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.TresdeFebrero:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Moron:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.LaMatanza:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.LomasdeZAmora:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Lanus:
+                x = ;
+                y = ;
+                break;
+            case eBarrio.Avellaneda:
+                x = ;
+                y = ;
+                break;
+            default:
+                x = ;
+                y = ;
+                break;
+        }
 	}
 
 	~cUbicacion(){
 
 	}
+    public double getX() { return x; }
+    public double getY() { return y; }
 
-	/// 
-	/// <param name="ubicacion"></param>
-	public float CalcularDistancia(cUbicacion ubicacion){
+    public eBarrio GetBarrio() { return Com_Part; }
 
-		return 0;
-	}
 
 }//end cUbicacion

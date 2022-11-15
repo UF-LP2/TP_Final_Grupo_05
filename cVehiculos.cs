@@ -12,17 +12,16 @@ using System.Text;
 using System.IO;
 
 
-
 public class cVehiculos {
 
-	private readonly int Cant_Viajes;
-	private readonly float Capacidad_Max_Combustible;
-	private readonly float Carga_Util;
-	private readonly int Consumo;
-	private struct Dimensiones;
-	private readonly float Peso_Max;
-	private int Viajes_Realizados;
-	private readonly float Vol_Max;
+    protected int Cant_Viajes;
+    protected float Capacidad_Max_Combustible;
+    protected float Carga_Util;
+    protected double Consumo;
+    protected Dimensiones dimens_vehiculo;
+    protected float Peso_Max;
+    protected int Viajes_Realizados;
+	protected double Vol_Max;
 
 	public cVehiculos(){
 
@@ -34,8 +33,14 @@ public class cVehiculos {
 
 	/// 
 	/// <param name="pedido"></param>
-	public void CargarVehiculo(cPedido pedido){
+	public void CargarVehiculo(cPedidos pedido){
+
 
 	}
+    public int getVol_Max()
+    {
+        return Convert.ToInt16(Vol_Max);
+    }
+
 
 }//end cVehiculos

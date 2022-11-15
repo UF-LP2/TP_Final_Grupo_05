@@ -11,19 +11,38 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+/*
+public struct Dimensiones
+{
+    public double ancho;
+    public double largo;
+    public double alto;
+}
 
+public enum eTipoArt : int { Linea_Blanca, Electrdomestico, Televisor }
 
-public class cArticulos {
+*/
+public abstract class cArticulos {
 
-	private struct Dimensiones;
-	private readonly float peso;
-	private readonly float volumen;
+    private string nombre;
+	private Dimensiones dimens;
+	private float peso;
+	private double volumen;
+    public eTipoArt TipoArticulo;
 
-	public cArticulos(){
+	public cArticulos(string nombre_, double ancho_, double largo_, double alto_, float peso_, eTipoArt TipoArticulo_)
+    {
+        nombre = nombre_;
+        dimens.ancho = ancho_;
+        dimens.largo = largo_;
+        dimens.alto = alto_;
+        peso = peso_;
+        volumen = ancho_*largo_*alto_;
+        TipoArticulo = TipoArticulo_;
 
-	}
+    }
 
-	~cArticulos(){
+    ~cArticulos(){
 
 	}
 

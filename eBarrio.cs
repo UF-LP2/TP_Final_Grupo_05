@@ -11,14 +11,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-
-
 /// <summary>
 /// Todos los barrios de CABA y primer cordón del Conurbano
 /// </summary>
 public enum eBarrio : int {
 
-	Barrios CABA,
-	Barrios 1er Cordon
-
+	Comuna_1 = 1, Comuna_2, Comuna_3, Comuna_4, Comuna_5, Comuna_6, Comuna_7, Comuna_8, Comuna_9, Comuna_10, Comuna_11, Comuna_12, Comuna_13, Comuna_14, Comuna_15,
+	VicenteLopez, SanIsidro, SanMartin, TresdeFebrero, Moron, LaMatanza, LomasdeZAmora, Lanus, Avellaneda
 }//end eBarrio
+

@@ -10,34 +10,47 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Runtime.Intrinsics.X86;
 
-
-
-public enum ePrioridad : int
+public enum ePrioridad : int{EXPRESS = 1, DOSDIAS = 2, NORMAL = 3, DIFERIDO = 4};
+public struct Dimensiones
 {
-
-	EXPRESS = 1,
-	DOSDIAS = 2,
-	NORMAL = 3,
-	DIFERIDO = 4
-
+    public double ancho;
+    public double largo;
+    public double alto;
 }
+public enum eTipoArt : int { Linea_Blanca, Electrdomestico, Televisor }
+
 public class cPedidos {
 
-	private readonly string NumPedido;
+	static private int NumPedido = 0;
 	private ePrioridad Prioridad;
 	public cCliente Cliente;
-	public List<cArticulos> Articulos;
+    private string nombre;
+    private Dimensiones dimens;
+    private float peso;
+    private double volumen;
+    public eTipoArt TipoArticulo;
 
-	public cPedidos(){
-
-	}
-
-	~cPedidos(){
-
-	}
-	string getPrioridad()
+    public cPedidos(cCliente Cliente_, ePrioridad Prioridad_, string nombre_, double ancho_, double largo_, double alto_, float peso_, eTipoArt TipoArticulo_)
     {
+        nombre = nombre_;
+        dimens.ancho = ancho_;
+        dimens.largo = largo_;
+        dimens.alto = alto_;
+        peso = peso_;
+        volumen = ancho_ * largo_ * alto_;
+        TipoArticulo = TipoArticulo_;
+        NumPedido++;
+		Cliente = Cliente_;
+		Prioridad = Prioridad_;
+	}
+    ~cPedidos(){
+
+	}
+	public string getPrioridad()
+    {
+		
         switch (Prioridad)
         {
 			case EXPRESS:
@@ -48,10 +61,12 @@ public class cPedidos {
 				return "normal";
 			case DIFERIDO:
 				return "diferido";
+			default:
+				return "express";
 		}
     }
-	void ModificarPrioridad()
+	public void ModificarPrioridad()
     {
-		Prioridad = Prioridad - 1;
+		Prioridad--;
     }
 }//end cPedidos
