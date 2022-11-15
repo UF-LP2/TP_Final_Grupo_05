@@ -29,7 +29,7 @@ static class Program
             PedidosASalir = Cocimundo.Dinamico_Mochila(Cocimundo.ListaVehiculos[i]);
 
             //se hace el algoritmo de distribucion
-            PedidosASalir = Cocimundo.Distribucion_greedy(Cocimundo.ListaVehiculos[0]);
+            PedidosASalir = Cocimundo.Distribucion_greedy(PedidosASalir, Cocimundo.ListaVehiculos[i]);
 
             //se cuenta el dinero ganado y se suma a la caja de cocimundo
             for (int j = 0; j < PedidosASalir.Count; j++)
