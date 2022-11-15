@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Xml.Schema;
+using System.Security.Cryptography.X509Certificates;
 
 public class cCocimundo {
 
@@ -30,7 +31,24 @@ public class cCocimundo {
 
     ~cCocimundo(){
 
+
+    
 	}
+    public void ImprimirMatriz(int[,] matriz, int fila, int columna)
+    {
+        Console.WriteLine("Matriz");
+        for(int i = 0; i < fila; i++)
+        {
+        
+            for (int j = 0; j < columna; j++)
+            {
+                Console.WriteLine(matriz[i,j]);
+               
+            }
+           
+        }
+       
+    }
 	public void AgregarPedido(cPedidos pedido){
 		ListaPedidos.Add(pedido);
 			}
@@ -70,18 +88,22 @@ public class cCocimundo {
     {
 	
 		int numpedidos = ListaPedidos.Count();
-		int[,] Matriz = new int[numpedidos +1 , vehiculo.getVol_Max() +1]; //Crea una matriz de dimensiones N: numero de pedidos total y M: volumen maximo del vehiculo pasado por parametro
+        int volumen = vehiculo.getVol_Max();
+
+        int[,] Matriz = new int[numpedidos +1 , vehiculo.getVol_Max() +1]; //Crea una matriz de dimensiones N: numero de pedidos total y M: volumen maximo del vehiculo pasado por parametro
 		List<cPedidos> sublistapedidos = new List<cPedidos>();
         int value;
         for (int i = 0; i < numpedidos; i++)
         {
-            for (int w = 0; w < vehiculo.getVol_Max(); w++)
+            for (int w = 0; w < volumen; w++)
             {
                 if (w == 0 || i == 0) //Llena la primer columna y la primer fila de la matriz con 0
-                { Matriz[i, w] = 0; }
+                {
+                    Matriz[i, w] = 0;
+                }
                 else if (ListaPedidos[i - 1].getVolumen() <= w)
                 {
-                    value = ListaPedidos[i - 1].getValue() + Matriz[i - 1, w - (int)ListaPedidos[i - 1].getVolumen()];
+                    value = ListaPedidos[i - 1].getValue() + Matriz[i - 1, w - (int)(ListaPedidos[i - 1].getVolumen())];
 
                     if (value > Matriz[i - 1, w])
                     // Se compara el value entre el valor del producto +  la matriz del (volumen - el peso del objeto anterior)  y la posicion anterior de la matriz
@@ -102,8 +124,9 @@ public class cCocimundo {
         
             }
 
-            //printf("La ganancia total es [0]", Matriz[i, w]); imprime la ganancia total
+            
         }
+        ImprimirMatriz(Matriz, numpedidos + 1, volumen + 1);
         return sublistapedidos; //devuelve la sublista de pedidos
     }
 
