@@ -5,19 +5,19 @@ namespace tp_final;
 
 public partial class Form1 : Form
 {
-    List<cPedidos> ListaGlobal = new List<cPedidos>();
+    List<cPedidos> ListaGlobal = new List<cPedidos>(); //creo una lista externa para poder usarla en el boton
     public Form1(List<cPedidos> ListaPedidos)
     {
         InitializeComponent();
         var csv_ = new csvfiles._csv();
         List<Pedido> Pedidos = csv_.read_csv();
         ListaGlobal = ListaPedidos;
-        for (int i = 0; i < ListaPedidos.Count; i++)
+        for (int i = 0; i < ListaPedidos.Count; i++) //recorro toda la lista
         {
-            switch (ListaPedidos[i].Cliente.m_cUbicacion.GetBarrio())
+            switch (ListaPedidos[i].Cliente.m_cUbicacion.GetBarrio()) //reviso los barrios, y segun que barrio, pinto la label correspondiente a esa comuna
             {
                 case eBarrio.Comuna_1:
-                    label19.BackColor = label23.BackColor;
+                    label19.BackColor = label23.BackColor; //usa el color de una de las labels del grafo
                     break;
                 case eBarrio.Comuna_2:
                     label14.BackColor = label23.BackColor;
@@ -92,11 +92,11 @@ public partial class Form1 : Form
         }
     }
 
-    public void button1_Click(object sender, EventArgs e)
+    public void button1_Click(object sender, EventArgs e) //cuando se aprete el boton
     {
-        for (int j = 0; j < ListaGlobal.Count; j++)
+        for (int j = 0; j < ListaGlobal.Count; j++) //recorre la lsta nuevamente
         {
-            switch (ListaGlobal[j].Cliente.m_cUbicacion.GetBarrio())
+            switch (ListaGlobal[j].Cliente.m_cUbicacion.GetBarrio()) //y segun el barrio pinta de verde si fue entreagdo el pedido
             {
                 case eBarrio.Comuna_1:
                     label19.BackColor = label33.BackColor;
@@ -171,9 +171,9 @@ public partial class Form1 : Form
                     label27.BackColor = label33.BackColor;
                     break;
             }
-            System.Threading.Thread.Sleep(125);
+            System.Threading.Thread.Sleep(125); //espera 1/4 de segundo
         }
-        //label o cuadro de texto termino, todos los pedidos fueron entregados
+
         Salida.BackColor = System.Drawing.Color.LightBlue;
         Salida.ForeColor = System.Drawing.Color.DarkBlue;
         Salida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;

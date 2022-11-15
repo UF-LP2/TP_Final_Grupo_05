@@ -21,11 +21,11 @@ public class cUbicacion {
 
 	public cUbicacion(eBarrio Barrio){
 		Com_Part = Barrio;
-		switch(Barrio)
+		switch(Barrio) //me fijo que barrio es y se le asignan una coordenada en X e Y 
 		{
             case eBarrio.Comuna_1:
                 x = 14.1; //km a comuna 1 (desde liniers especificamente)
-                y = 1.1;
+                y = 1.1; //km a comuna 1 (desde liniers especificamente)
                 break;
             case eBarrio.Comuna_2:
                 x = 13.5;
@@ -134,7 +134,7 @@ public class cUbicacion {
 
     public eBarrio GetBarrio() { return Com_Part; }
 
-    public string to_String()
+    public string to_String() //el tostring de las ubicaciones
     {
         string texto;
         switch (Com_Part)

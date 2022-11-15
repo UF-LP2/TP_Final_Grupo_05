@@ -69,14 +69,6 @@ public class cCocimundo {
       
 
     }*/
-	public void AgregarPedido(cPedidos pedido){
-		ListaPedidos.Add(pedido);
-			}
-
-	public void EliminarPedido(cPedidos pedido)
-	{
-		ListaPedidos.Remove(pedido);
-	}
 
 	public void FinalDelDia(){
 		for (int i = 0; i < ListaPedidos.Count; i++)
@@ -84,46 +76,45 @@ public class cCocimundo {
 			ListaPedidos[i].ModificarPrioridad();
         }
         Console.WriteLine("\n\n\nEl dinero final fue de: {0} pesos, la ganancia neta total fue de: {1} pesos", Convert.ToString(Dinero), Convert.ToString(Dinero - 1000000));
-
     }
 
-    public void OrdenarListaPedidos()
+    public void OrdenarListaPedidos() //ordena primero por comuna/localidad y despues por prioridad
     {
         ListaPedidos = ListaPedidos.OrderBy(cPedidos => cPedidos.Cliente.m_cUbicacion.GetBarrio()).ToList();
         ListaPedidos = ListaPedidos.OrderBy(cPedidos => cPedidos.getPrioridad()).ToList();
     }
 
-    public double funcionDistancia(cPedidos desde, cPedidos hasta)
+    public double funcionDistancia(cPedidos desde, cPedidos hasta) //funcon que calcula distancia de un punto a otro
 	{
 		double distancia = 0;
 		if (desde.Cliente.m_cUbicacion.GetBarrio() == hasta.Cliente.m_cUbicacion.GetBarrio())
-			distancia = Math.Sqrt(Math.Pow(hasta.Cliente.m_cUbicacion.getX(), 2) + Math.Pow(hasta.Cliente.m_cUbicacion.getY(), 2));
+			distancia = Math.Sqrt(Math.Pow(hasta.Cliente.m_cUbicacion.getX(), 2) + Math.Pow(hasta.Cliente.m_cUbicacion.getY(), 2)); //si el destino y el puntod e partida son el mismo, se sca la distancia a liniers
 		else
-			distancia = Math.Sqrt(Math.Pow(hasta.Cliente.m_cUbicacion.getX() - desde.Cliente.m_cUbicacion.getX(), 2) 
+			distancia = Math.Sqrt(Math.Pow(hasta.Cliente.m_cUbicacion.getX() - desde.Cliente.m_cUbicacion.getX(), 2) //sino se sca la distancia entre los dos nodos
 				+ Math.Pow(hasta.Cliente.m_cUbicacion.getY() - desde.Cliente.m_cUbicacion.getY(), 2));
 		return distancia;
 	}
     
-    public List<cPedidos> Dinamico_Mochila(cVehiculos vehiculo)
+    public List<cPedidos> Dinamico_Mochila(cVehiculos vehiculo) //cargado dinamico
     {
-		int numpedidos = ListaPedidos.Count();
-        double cargaMax = vehiculo.getCarga_Max();
-        double volumenMax= vehiculo.getVol_Max();
+		int numpedidos = ListaPedidos.Count(), value = 0; //me guardo el numero de pedidos
+        double cargaMax = vehiculo.getCarga_Max(); //la carga maxima
+        double volumenMax= vehiculo.getVol_Max(); //y el volumen maximo
 
         int[,] Matriz = new int[numpedidos +1 , vehiculo.getVol_Max() +1]; //Crea una matriz de dimensiones N: numero de pedidos total y M: volumen maximo del vehiculo pasado por parametro
-		List<cPedidos> sublistapedidos = new List<cPedidos>();
-        int value;
-        for (int i = 0; i < numpedidos + 1; i++)
+		List<cPedidos> sublistapedidos = new List<cPedidos>(); //la lista de pedidos a entregar
+
+        for (int i = 0; i < numpedidos + 1; i++) //se recorre todos los pedidos de la lista completa
         {
-            for (int w = 0; w < vehiculo.getVol_Max() + 1; w++)
+            for (int w = 0; w < vehiculo.getVol_Max() + 1; w++) //se recorre meintras que siga habiendo volumen disponible
             {
                 if (w == 0 || i == 0) //Llena la primer columna y la primer fila de la matriz con 0
                 {
                     Matriz[i, w] = 0;
                 }
-                else if (ListaPedidos[i - 1].getVolumen() <= w)
+                else if (ListaPedidos[i - 1].getVolumen() <= w) //si aun hay espacio
                 {
-                    value = ListaPedidos[i - 1].getValue() + Matriz[i - 1, w - (int)(ListaPedidos[i - 1].getVolumen())];
+                    value = ListaPedidos[i - 1].getValue() + Matriz[i - 1, w - (int)(ListaPedidos[i - 1].getVolumen())]; //nos guardamos un valor basado en la prioridad
                     if (value > Matriz[i - 1, w])
                     // Se compara el value entre el valor del producto +  la matriz del (volumen - el peso del objeto anterior)  y la posicion anterior de la matriz
                     {
@@ -140,68 +131,64 @@ public class cCocimundo {
                 }
             }  
         }
-
-        sublistapedidos = RecorridoMatriz(Matriz, vehiculo);
-        sublistapedidos = complemento_llenado_dinamico(sublistapedidos, vehiculo);
+        //se llaman a dos funciones mas para hacer el backtracking
+        sublistapedidos = OptimosVolumen(Matriz, vehiculo); 
+        sublistapedidos = OptimosPeso(sublistapedidos, vehiculo);
         return sublistapedidos; //devuelve la sublista de pedidos
     }
 
-    public List<cPedidos> RecorridoMatriz(int[,] matriz, cVehiculos vehiculo)
+    public List<cPedidos> OptimosVolumen(int[,] matriz, cVehiculos vehiculo) //usando la matriz de la funcion anterior
+    {
+        List<cPedidos> lista_aux = new List<cPedidos>();
+
+        double res = matriz[ListaPedidos.Count(), (int)vehiculo.getVol_Max()]; //me creo una variable que se queda con la ultima posicion de la matriz
+        int l = ListaPedidos.Count();
+        int j = (int)vehiculo.getVol_Max();
+
+        while (l > 0 && j > 0) //recorre las posiciones de la matriz hasta quedarnos sin espacio
         {
-            List<cPedidos> lista_aux = new List<cPedidos>();
-
-            float res = matriz[ListaPedidos.Count(), (int)vehiculo.getVol_Max()];
-            int l = ListaPedidos.Count();
-            int j = (int)vehiculo.getVol_Max();
-
-            while (l > 0 && j > 0)
+            if (matriz[l, j] == matriz[l - 1, j]) //si es igual al de arriba, el producto en realidad no ayudo al beneficio
             {
-                if (matriz[l, j] == matriz[l - 1, j])
-                {
-                    l--;
-                    continue;
-                }
-                else
-                {
-                    lista_aux.Add(ListaPedidos[l - 1]);
-                    j = j - (int)ListaPedidos[l - 1].getVolumen();
-                    vehiculo.setVolActual(ListaPedidos[l - 1].getVolumen());
-                    ListaPedidos.Remove(ListaPedidos[l - 1]);
-                    l--;
-                }
+                l--;
+                continue;
             }
-
-            return lista_aux;
-
+            else //si ayuda, nos lo guardamos en un auxiliar, y como ese genera un optimo nos salteamos otros elementos
+            {
+                lista_aux.Add(ListaPedidos[l - 1]); //nos guardamos el pedido
+                j = j - (int)ListaPedidos[l - 1].getVolumen(); 
+                vehiculo.setVolActual(ListaPedidos[l - 1].getVolumen()); //nos guardamos el volumen de ese pedido
+                ListaPedidos.Remove(ListaPedidos[l - 1]); //y se saca de la lista de pedidos
+                l--;
+            }
         }
+        return lista_aux; //devuelve la lista de pedidos optimos (que generan el volumen optimo)
+    }
 
-       public List<cPedidos> complemento_llenado_dinamico(List<cPedidos> lista_llenado, cVehiculos vehiculo)
+       public List<cPedidos> OptimosPeso(List<cPedidos> lista_llenado, cVehiculos vehiculo)
         {
             List<cPedidos> lista_aux = new List<cPedidos>();
-
 
             lista_llenado.Reverse();
 
-            while(lista_llenado.Count() != 0)
+            while(lista_llenado.Count() != 0) //se fija que todos los elementos que generaron un volumen optimo entre en el peso
             {
-                if (lista_llenado[lista_llenado.Count()-1].getpeso() + vehiculo.getPesoActual() < vehiculo.getCarga_Max()) //comparamos solo el peso porque ya sabemos que va a estar bien de volumen (la lista_llenado es la optima en cuanto a volumen)
+                if (lista_llenado[lista_llenado.Count()-1].getpeso() + vehiculo.getPesoActual() < vehiculo.getCarga_Max()) //va chequeando los pesos de los optimos entren
                 {
-                    lista_aux.Add(lista_llenado[lista_llenado.Count()-1]);
-                    vehiculo.setPesoActual(lista_llenado[lista_llenado.Count() - 1].getpeso());
-                    lista_llenado.Remove(lista_llenado[lista_llenado.Count() - 1]);
+                    lista_aux.Add(lista_llenado[lista_llenado.Count()-1]); //se guarda el elemento
+                    vehiculo.setPesoActual(lista_llenado[lista_llenado.Count() - 1].getpeso()); //se suma su peso
+                    lista_llenado.Remove(lista_llenado[lista_llenado.Count() - 1]); //se quita de la lista
                 }
-                else
+                else //sino 
                 {
-                    ListaPedidos.Add(lista_llenado[lista_llenado.Count() - 1]);
-                    lista_llenado.Remove(lista_llenado[lista_llenado.Count() - 1]);
+                    ListaPedidos.Add(lista_llenado[lista_llenado.Count() - 1]); //se devuelve el pedido a la lista original
+                    lista_llenado.Remove(lista_llenado[lista_llenado.Count() - 1]); //lo saca de la lista optima
                 }
             }
-            //si queda peso y volumen disponible en el vehiculo, nos fijamos que elementos de la lista general de todos los pedidios pueden entrar en el vehiculo
-            if(vehiculo.getPesoActual()<vehiculo.getCarga_Max() && vehiculo.getVolActual()<vehiculo.getVol_Max() && ListaPedidos.Count > 0)
+            if(vehiculo.getPesoActual()<vehiculo.getCarga_Max() && vehiculo.getVolActual()<vehiculo.getVol_Max() && ListaPedidos.Count > 0) //si el volumen actual y el peso actual son menores al maximo, intenta meter otro  pedido
             {
-                for (int i = 0; i < ListaPedidos.Count(); i++)
+                for (int i = 0; i < ListaPedidos.Count(); i++) //recorre la lista nuevamente
                 {
-                    if (ListaPedidos[i].getpeso() + vehiculo.getPesoActual() < vehiculo.getCarga_Max() && ListaPedidos[i].getVolumen() + vehiculo.getVolActual() < vehiculo.getVol_Max())
+                    if (ListaPedidos[i].getpeso() + vehiculo.getPesoActual() < vehiculo.getCarga_Max() && ListaPedidos[i].getVolumen() + vehiculo.getVolActual() < vehiculo.getVol_Max()) //si entra lo agrega haciendo el mismo proceso que en el optimo de volumen
                     {
                         lista_aux.Add(ListaPedidos[i]);
                         vehiculo.setPesoActual(ListaPedidos[i].getpeso());
@@ -211,41 +198,41 @@ public class cCocimundo {
                     }
                 }
             }
-            return lista_aux;
+            return lista_aux; //devuelve la sublista buscada
         }
 
-    public List<cPedidos> Distribucion_greedy(List<cPedidos>ListaAOrdenar, cVehiculos Vehiculo)
+    public List<cPedidos> Distribucion_greedy(List<cPedidos>ListaAOrdenar, cVehiculos Vehiculo) //distribucion
 	{
 		List<cPedidos> ListaOrdenada = new List<cPedidos>();
-        Vehiculo.setdistanciarecorrida(0);
+        Vehiculo.setdistanciarecorrida(0); //se pone la distancia recorrida como 0
 		int pos = 0, cant = ListaAOrdenar.Count;
 		double distancia = 0, distancia_total = 0;
-		for(int j = 0; j< cant; j++)
+		for(int j = 0; j< cant; j++) //recorrer la lista
 		{
-			if(j == 0)
+			if(j == 0) //si es el primer elemento
 			{
-				distancia = funcionDistancia(ListaAOrdenar[j], ListaAOrdenar[j]);
+				distancia = funcionDistancia(ListaAOrdenar[j], ListaAOrdenar[j]); //calcula la distancia de este
 				pos = j;
-				for(int i = 0; i< ListaAOrdenar.Count;i++)
+				for(int i = 0; i< ListaAOrdenar.Count;i++) //recorre todos los otros pedidos
 				{
-					if (distancia > funcionDistancia(ListaAOrdenar[i], ListaAOrdenar[i]))
+					if (distancia > funcionDistancia(ListaAOrdenar[i], ListaAOrdenar[i])) //si estan mas cerca de liniers que el anterior
 					{
-                        distancia = funcionDistancia(ListaAOrdenar[i], ListaAOrdenar[i]);
+                        distancia = funcionDistancia(ListaAOrdenar[i], ListaAOrdenar[i]); //me guardo la distancia y la posicion
 						pos = i;
                     }
                 }
-				ListaOrdenada.Add(ListaAOrdenar[pos]);
-                ListaAOrdenar.Remove(ListaAOrdenar[pos]);
-                distancia_total += distancia;
+				ListaOrdenada.Add(ListaAOrdenar[pos]); //agregar a la lista ordenada de la lista a ordenar
+                ListaAOrdenar.Remove(ListaAOrdenar[pos]); // se borra el elemento de la lista a ordenar
+                distancia_total += distancia;  //se acumula la distancia total
 
             }
-            else
+            else //sino
 			{
-                distancia = 99999999999;
+                distancia = 99999999999; //se pone una distancia super alta para quedarnos siemre con la primer distancia que venga
                 pos = j;
-                for (int i = 0; i < ListaAOrdenar.Count; i++)
+                for (int i = 0; i < ListaAOrdenar.Count; i++) //recorro el resto de la lista
                 {
-                    if (distancia > funcionDistancia(ListaOrdenada.Last(), ListaAOrdenar[i]))
+                    if (distancia > funcionDistancia(ListaOrdenada.Last(), ListaAOrdenar[i])) 
                     {
                         distancia = funcionDistancia(ListaOrdenada.Last(), ListaAOrdenar[i]);
                         pos = i;
@@ -256,11 +243,11 @@ public class cCocimundo {
                 distancia_total += distancia;
             }
         }
-        Vehiculo.setdistanciarecorrida(distancia_total + funcionDistancia(ListaOrdenada.Last(), ListaOrdenada.Last()));
-		return ListaOrdenada;
+        Vehiculo.setdistanciarecorrida(distancia_total + funcionDistancia(ListaOrdenada.Last(), ListaOrdenada.Last())); //me guardo la distancia total que se va a recorrer
+		return ListaOrdenada; //devuelvo la lista ordenada de pedidos
 	}
 
-    public double NaftadelVjaje(cVehiculos Vehiculo)
+    public double NaftadelVjaje(cVehiculos Vehiculo) //calcula la distancia recorrida por el consumo por kilometro del vehiculo
     {
         return Vehiculo.getdistanciarecorrida() * Vehiculo.getconsumo();
 
@@ -423,9 +410,9 @@ public class cCocimundo {
         ListaPedidos.Add(Pedido48);
 #endregion
         return;
-    }
+    } //carga todos los objetos
 
-    public void crearvehiculos()
+    public void crearvehiculos() //crea los vehiculos
     {
         cCamion Furgon = new cCamion();
         cFurgoneta Furgoneta = new cFurgoneta();

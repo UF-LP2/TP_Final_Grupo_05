@@ -13,14 +13,14 @@ using System.IO;
 using System.Runtime.Intrinsics.X86;
 using CsvHelper.Configuration.Attributes;
 
-public enum ePrioridad : int{EXPRESS = 1, DOSDIAS = 2, NORMAL = 3, DIFERIDO = 4};
-public struct Dimensiones
+public enum ePrioridad : int{EXPRESS = 1, DOSDIAS = 2, NORMAL = 3, DIFERIDO = 4}; //enum de prioridades
+public struct Dimensiones //struct de dimensiones
 {
     public double ancho;
     public double largo;
     public double alto;
 }
-public enum eTipoArt : int { Linea_Blanca, Electronico, Televisor, PequeElectro }
+public enum eTipoArt : int { Linea_Blanca, Electronico, Televisor, PequeElectro } //enum de tipo de articulo
 
 public class cPedidos {
 
@@ -61,7 +61,7 @@ public class cPedidos {
         int promedio = ((int)this.peso/(int)this.Prioridad); //El value hace el promedio entre el peso y la prioridad del objeto
         return promedio;
     }
-	public ePrioridad getPrioridad()
+	public ePrioridad getPrioridad() //getter de prioridad
     {
 		
         switch (this.Prioridad)
@@ -83,7 +83,7 @@ public class cPedidos {
 		Prioridad--;
     }
 
-    public string to_String()
+    public string to_String() //to string del cliente
     {
         string texto;
         texto = Cliente.to_String();

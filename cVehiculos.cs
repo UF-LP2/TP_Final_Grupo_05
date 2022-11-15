@@ -45,12 +45,6 @@ public class cVehiculos {
     public double getCarga_Max() { return Peso_Max; }
 
     public double getpreciocomb() { return preciocomb; }
-    /// 
-    /// <param name="pedido"></param>
-    public void CargarVehiculo(cPedidos pedido){
-
-
-	}
     public int getVol_Max()
     {
         return Convert.ToInt16(Vol_Max);
