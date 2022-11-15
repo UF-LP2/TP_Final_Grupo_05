@@ -35,7 +35,7 @@ public class cCocimundo {
 
     
 	}
-    public void LlenarMochila(int[,] matriz, int fila, int columna, List<cPedidos> sublista, List<cPedidos> Lista)
+    public void LlenarMochila(int[,] matriz, int fila, int columna, List<cPedidos> sublista)
     {
         // Se queda con lo que le genera mas ganancia
         int max = 0;
@@ -57,7 +57,7 @@ public class cCocimundo {
         for (int i = iterador; i < fila; i++)
         {
 
-            sublista.Add(Lista[i]); //Agrega solo los elementos despues de este
+            sublista.Add(ListaPedidos[i]); //Agrega solo los elementos despues de este
             
         }
       
@@ -139,7 +139,7 @@ public class cCocimundo {
 
             
         }
-        LlenarMochila(Matriz, numpedidos + 1, volumen + 1, sublistapedidos, ListaPedidos);
+        LlenarMochila(Matriz, numpedidos + 1, volumen + 1, sublistapedidos);
         return sublistapedidos; //devuelve la sublista de pedidos
     }
 
