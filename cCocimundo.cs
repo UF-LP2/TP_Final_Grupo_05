@@ -53,6 +53,12 @@ public class cCocimundo {
 
     }
 
+    public void OrdenarListaPedidos()
+    {
+        ListaPedidos = ListaPedidos.OrderBy(cPedidos => cPedidos.Cliente.m_cUbicacion.GetBarrio()).ToList();
+        ListaPedidos = ListaPedidos.OrderBy(cPedidos => cPedidos.getPrioridad()).ToList();
+    }
+
     public double funcionDistancia(cPedidos desde, cPedidos hasta)
 	{
 		double distancia = 0;
@@ -63,10 +69,7 @@ public class cCocimundo {
 				+ Math.Pow(hasta.Cliente.m_cUbicacion.getY() - desde.Cliente.m_cUbicacion.getY(), 2));
 		return distancia;
 	}
-    /*public cPedido QuitarPedido(){
-
-		return null; 
-	}
+    /*
     public int Dinamico_Mochila(cVehiculos vehiculo)
     {
 	
@@ -76,7 +79,7 @@ public class cCocimundo {
 		List<cPedidos> sublistapedidos = new List<cPedidos>();
 		for (int j = 0; j < numpedidos; j++)
         {
-			if (ListaPedidos[j].getPrioridad == ePrioridad.EXPRESS)
+			if (ListaPedidos[j].getPrioridad() == ePrioridad.EXPRESS)
             {
 				sublistapedidos.Add(ListaPedidos[j]); // Hago una sublista de los pedidos express
 				
@@ -84,11 +87,11 @@ public class cCocimundo {
         } 
 		for (int i = 0; i < sublistapedidos.Count(); i++)
         {
-			for (int w = 0; w< ListaVehiculos.Volumen(); w++)//chequear
+			for (int w = 0; w< ListaVehiculos.volumen(); w++)//chequear
             {
-				if (w == 0 | i == 0)
-					Matriz[i][w] = 0;
-				else if (sublistapedidos[i - 1] <= w)
+				if (w == 0 || i == 0)
+					Matriz[i,w] = 0;
+				else if (sublistapedidos[i - 1]. <= w)
 
 					Matriz[i][w] = max(Matriz[i - 1, w - wt[i - 1]], Matriz[i - 1, w]);
 				else
@@ -280,7 +283,7 @@ public class cCocimundo {
         ListaPedidos.Add(Pedido22);
         ListaPedidos.Add(Pedido23);
         ListaPedidos.Add(Pedido24);
-        /*ListaPedidos.Add(Pedido25);
+        ListaPedidos.Add(Pedido25);
         ListaPedidos.Add(Pedido26); 
         ListaPedidos.Add(Pedido27);
         ListaPedidos.Add(Pedido28);
@@ -303,7 +306,7 @@ public class cCocimundo {
         ListaPedidos.Add(Pedido45);
         ListaPedidos.Add(Pedido46);
         ListaPedidos.Add(Pedido47);
-        ListaPedidos.Add(Pedido48);*/
+        ListaPedidos.Add(Pedido48);
 #endregion
         return;
     }
