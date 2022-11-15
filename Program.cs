@@ -26,7 +26,7 @@ static class Program
         for(int i = 0;i< Cocimundo.ListaVehiculos.Count;i++)
         {
             //se hace el algoritmo de guardado dinamico
-            //PedidosASalir = Dinamico_Mochila();
+            PedidosASalir = Cocimundo.Dinamico_Mochila(Cocimundo.ListaVehiculos[i]);
 
             //se hace el algoritmo de distribucion
             PedidosASalir = Cocimundo.Distribucion_greedy(Cocimundo.ListaVehiculos[0]);
