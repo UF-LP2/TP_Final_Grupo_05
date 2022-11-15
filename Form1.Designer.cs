@@ -477,7 +477,7 @@ partial class Form1
             // 
             this.Salida.AutoSize = true;
             this.Salida.BackColor = System.Drawing.Color.Transparent;
-            this.Salida.Location = new System.Drawing.Point(282, 245);
+            this.Salida.Location = new System.Drawing.Point(337, 19);
             this.Salida.Name = "Salida";
             this.Salida.Size = new System.Drawing.Size(0, 15);
             this.Salida.TabIndex = 42;
