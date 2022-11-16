@@ -38,9 +38,12 @@ static class Program
             //se resta el dinero gastado por la nafta, cada vehiculo gasta segun la disstancia recorrida, se carga cuando sea necesario, y cuando se vuelve a la base nuevamente
             Cocimundo.MenosDinero(Cocimundo.ListaVehiculos[0].getpreciocomb() * Cocimundo.NaftadelVjaje(Cocimundo.ListaVehiculos[0]));
 
-            ////imprmir la lista de pedidos a despachar
-            for (int j = 0; j < PedidosASalir.Count; j++)
+        ////imprmir la lista de pedidos a despachar
+
+                Console.WriteLine("Pedidos a salir");
+        for (int j = 0; j < PedidosASalir.Count(); j++)
             {
+          
                 Console.WriteLine(PedidosASalir[j].to_String());
             }
 
